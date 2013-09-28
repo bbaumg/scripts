@@ -62,18 +62,18 @@ echo "-A INPUT -p udp --dport 123 -j ACCEPT" >> $ipt
 echo "" >> $ipt
 echo "#Base logging rules" >> $ipt
 echo "-A INPUT -j REJECT --reject-with icmp-host-prohibited" >> $ipt
-echo "-A INPUT -i eth0 -s 10.0.0.0/8 -j LOG --log-prefix "IP DROP SPOOF "" >> $ipt
-echo "-A INPUT -i eth0 -s 172.16.0.0/12 -j LOG --log-prefix "IP DROP SPOOF "" >> $ipt
-echo "-A INPUT -i eth0 -s 192.168.0.0/16 -j LOG --log-prefix "IP DROP SPOOF "" >> $ipt
-echo "-A INPUT -i eth0 -s 224.0.0.0/4 -j LOG --log-prefix "IP DROP MULTICAST "" >> $ipt
-echo "-A INPUT -i eth0 -s 240.0.0.0/5 -j LOG --log-prefix "IP DROP SPOOF "" >> $ipt
-echo "-A INPUT -i eth0 -d 127.0.0.0/8 -j LOG --log-prefix "IP DROP LOOPBACK "" >> $ipt
-echo "-A INPUT -i eth0 -s 169.254.0.0/16  -j LOG --log-prefix "IP DROP MULTICAST "" >> $ipt
-echo "-A INPUT -i eth0 -s 0.0.0.0/8  -j LOG --log-prefix "IP DROP "" >> $ipt
-echo "-A INPUT -i eth0 -s  240.0.0.0/4  -j LOG --log-prefix "IP DROP "" >> $ipt
-echo "-A INPUT -i eth0 -s  255.255.255.255/32  -j LOG --log-prefix "IP DROP  "" >> $ipt
-echo "-A INPUT -i eth0 -s 168.254.0.0/16  -j LOG --log-prefix "IP DROP "" >> $ipt
-echo "-A INPUT -i eth0 -s 248.0.0.0/5  -j LOG --log-prefix "IP DROP "" >> $ipt
+echo "-A INPUT -i eth0 -s 10.0.0.0/8 -j LOG --log-prefix \"IP DROP SPOOF \"" >> $ipt
+echo "-A INPUT -i eth0 -s 172.16.0.0/12 -j LOG --log-prefix \"IP DROP SPOOF \"" >> $ipt
+echo "-A INPUT -i eth0 -s 192.168.0.0/16 -j LOG --log-prefix \"IP DROP SPOOF \"" >> $ipt
+echo "-A INPUT -i eth0 -s 224.0.0.0/4 -j LOG --log-prefix \"IP DROP MULTICAST \"" >> $ipt
+echo "-A INPUT -i eth0 -s 240.0.0.0/5 -j LOG --log-prefix \"IP DROP SPOOF \"" >> $ipt
+echo "-A INPUT -i eth0 -d 127.0.0.0/8 -j LOG --log-prefix \"IP DROP LOOPBACK \"" >> $ipt
+echo "-A INPUT -i eth0 -s 169.254.0.0/16  -j LOG --log-prefix \"IP DROP MULTICAST \"" >> $ipt
+echo "-A INPUT -i eth0 -s 0.0.0.0/8  -j LOG --log-prefix \"IP DROP \"" >> $ipt
+echo "-A INPUT -i eth0 -s  240.0.0.0/4  -j LOG --log-prefix \"IP DROP \"" >> $ipt
+echo "-A INPUT -i eth0 -s  255.255.255.255/32  -j LOG --log-prefix \"IP DROP \"" >> $ipt
+echo "-A INPUT -i eth0 -s 168.254.0.0/16  -j LOG --log-prefix \"IP DROP \"" >> $ipt
+echo "-A INPUT -i eth0 -s 248.0.0.0/5  -j LOG --log-prefix \"IP DROP \"" >> $ipt
 echo "COMMIT" >> $ipt
 service iptables restart
 
