@@ -17,8 +17,8 @@ passwd $admin
 
 # Collecting system information
 echo -n "Enter the hostname [ENTER]: "
-read hostname
-hostname $hostname
+read v_hostname
+hostname $v_hostname
 echo -n "Enter the IP address [ENTER]: "
 read ipaddr
 #echo -n "Enter the subnet mask [ENTER]: "
