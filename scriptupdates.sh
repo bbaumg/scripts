@@ -2,7 +2,7 @@
 
 echo "Updating issue"
 rm -f /etc/issue
-wget --output-document=/etc/issue https://raw.github.com/bbaumg/scripts/master/issue
+wget --output-document=/etc/issue https://raw.github.com/bbaumg/scripts/master/banner
 cp /etc/issue /etc/issue.$(date +"%Y%m%d%H%M%S")
 echo "Updating MOTD"
 rm -f /etc/motd.sh
