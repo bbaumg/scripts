@@ -11,7 +11,7 @@ yum install -y wget
 
 # Download the most current firstrun.sh script
 echo "Downloading firstrun.sh" | tee -a $log
-wget --output-document=/etc/firstrun.sh https://raw.github.com/bbaumg/scripts/edit/master/firstrun.sh
+wget --output-document=/etc/firstrun.sh https://raw.github.com/bbaumg/scripts/master/firstrun.sh
 
 # Start firstrun.sh
 bash /etc/firstrun.sh
