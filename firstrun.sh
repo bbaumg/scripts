@@ -96,7 +96,8 @@ echo  >> $v_issue
 echo  >> $v_issue
 
 #Create MOTD script (part of bashrc)
-v_bashrc=/etc/bashrc
+v_bashrc=/etc/motd.sh
+touch=$v_bashrc
 echo "echo " >> $v_bashrc
 echo "echo " >> $v_bashrc
 echo "echo \"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\"" >> $v_bashrc
@@ -107,6 +108,8 @@ echo "echo \"+       Uptime = \" \$(uptime)" >> $v_bashrc
 echo "echo \"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\"" >> $v_bashrc
 echo "echo " >> $v_bashrc
 echo "echo " >> $v_bashrc
+
+echo "bash /etc/motd.sh" >> /etc/bashrc
 
 #Update, upgrade, and install apps
 echo "YUM update" | tee -a $log
