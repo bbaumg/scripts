@@ -5,16 +5,17 @@ if [ -f "$log" ]; then
         exit 1
 fi
 
-#Collect the needed information
+# Setting up the first Admin
 echo -n "Enter the first admin uername [ENTER]: "
 read admin
-
 #Create user groups
 echo "Adding admins" | tee -a $log
 groupadd admins
 useradd --groups admins $admin
 echo “Enter the first admin’s password:”
 passwd $admin
+
+# Collecting system information
 echo -n "Enter the hostname [ENTER]: "
 read hostname
 hostname $hostname
@@ -28,27 +29,6 @@ read gateway
 #echo -n "Enter the DNS [ENTER]: "
 #read dns
 dns="8.8.8.8"
-
-#Configur the NIC card
-eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
-if [ ! -f "$eth0" ]; then
-        echo "Making a backup of '$eth0'" | tee -a $log
-        cp -f $eth0 $eth0.backup
-fi
-rm -rf /etc/udev/rules.d/70-*
-mac=$(cat /sys/class/net/eth0/address)
-echo "Configuring the NIC:" | tee -a $log
-echo "DEVICE=eth0" > $eth0
-echo "TYPE=Ethernet" >> $eth0
-echo "ONBOOT=yes" >> $eth0
-echo "NM_CONTROLLED=yes" >> $eth0
-echo "HWADDR=$mac" >> $eth0
-echo "BOOTPROTO=none" >> $eth0
-echo "IPADDR=$ipaddr" >> $eth0
-echo "NETMASK=$netmask" >> $eth0
-echo "GATEWAY=$gateway" >> $eth0
-echo "DNS=$dns" >> $eth0
-service network restart
 
 #Disable SELINUX
 echo "Disabling SELINUX" | tee -a $log
@@ -138,8 +118,28 @@ yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget man ntsy
 echo "cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
+#Configure the NIC card
+eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
+if [ ! -f "$eth0" ]; then
+        echo "Making a backup of '$eth0'" | tee -a $log
+        cp -f $eth0 $eth0.backup
+fi
+rm -rf /etc/udev/rules.d/70-*
+mac=$(cat /sys/class/net/eth0/address)
+echo "Configuring the NIC:" | tee -a $log
+echo "DEVICE=eth0" > $eth0
+echo "TYPE=Ethernet" >> $eth0
+echo "ONBOOT=yes" >> $eth0
+echo "NM_CONTROLLED=yes" >> $eth0
+echo "HWADDR=$mac" >> $eth0
+echo "BOOTPROTO=none" >> $eth0
+echo "IPADDR=$ipaddr" >> $eth0
+echo "NETMASK=$netmask" >> $eth0
+echo "GATEWAY=$gateway" >> $eth0
+echo "DNS=$dns" >> $eth0
+service network restart
+
 #Cleanup and reboot
 awk '!/firstboot/' /etc/rc.local
-echo "bash /etc/motd.sh" >> /etc/rc.local
 shutdown -r now
 
