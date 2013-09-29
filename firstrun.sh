@@ -81,34 +81,7 @@ service iptables restart
 echo "Configuring sudoers" | tee -a $log
 echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
-# Write the pre-login banner
-echo "Writing logon banner" | tee -a $log
-v_issue=/etc/issue
-echo  > $v_issue
-echo  >> $v_issue
-echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" >> $v_issue
-echo "+  This system is restricted to authorized access only." >> $v_issue
-echo "+  All activities on this system are recorded and logged." >> $v_issue
-echo "+  Unauthorized access will be fully investigated" >> $v_issue
-echo "+  and reported to the appropriate law enforcement agencies." >> $v_issue
-echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" >> $v_issue
-echo  >> $v_issue
-echo  >> $v_issue
-
-#Create MOTD script (part of bashrc)
-v_bashrc=/etc/motd.sh
-touch=$v_bashrc
-echo "echo " >> $v_bashrc
-echo "echo " >> $v_bashrc
-echo "echo \"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\"" >> $v_bashrc
-echo "echo \"+     Hostname = \" \$(hostname)" >> $v_bashrc
-echo "echo \"+   IP Address = \" \$(ifconfig | sed -n '1 p' | awk '{print \$1}') \$(ifconfig | sed -n '2 p' | awk '{print \$2}')" >> $v_bashrc
-echo "echo \"+           OS = \" \$(cat /etc/redhat-release)" >> $v_bashrc
-echo "echo \"+       Uptime = \" \$(uptime)" >> $v_bashrc
-echo "echo \"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\"" >> $v_bashrc
-echo "echo " >> $v_bashrc
-echo "echo " >> $v_bashrc
-
+# Setup MOTD to run at login
 echo "bash /etc/motd.sh" >> /etc/bashrc
 
 #Update, upgrade, and install apps
@@ -120,6 +93,16 @@ echo "Install apps" | tee -a $log
 yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget man ntsysv ntp traceroute lynx ftp sudoers curl | tee -a $log
 echo "cleanup installs" | tee -a $log
 yum clean all | tee -a $log
+
+#Install the MCP
+v_mpc="/var/scripts/mcp.sh"
+mkdir /var/scripts
+echo '#!/bin/bash' | tee -a $log
+echo 'Starting MCP (Minion Control Program)' | tee -a $log
+echo 'Getting the most up to date minion.sh' | tee -a $log
+echo 'wget --output-document=/var/scripts/minion.sh https://raw.github.com/bbaumg/scripts/master/minion.sh' | tee -a $log
+echo 'Run MCP' | tee -a $log
+echo 'bash /var/scripts/minion.sh' | tee -a $log
 
 #Configure the NIC card
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
