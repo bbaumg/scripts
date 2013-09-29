@@ -97,12 +97,12 @@ yum clean all | tee -a $log
 #Install the MCP
 v_mpc="/var/scripts/mcp.sh"
 mkdir /var/scripts
-echo '#!/bin/bash' | tee -a $log
-echo 'Starting MCP (Minion Control Program)' | tee -a $log
-echo 'Getting the most up to date minion.sh' | tee -a $log
-echo 'wget --output-document=/var/scripts/minion.sh https://raw.github.com/bbaumg/scripts/master/minion.sh' | tee -a $log
-echo 'Run MCP' | tee -a $log
-echo 'bash /var/scripts/minion.sh' | tee -a $log
+echo '#!/bin/bash' > $v_mpc
+echo 'echo "Starting MCP (Minion Control Program)"' >> $v_mpc
+echo 'echo "Getting the most up to date minion.sh"' >> $v_mpc
+echo 'wget --output-document=/var/scripts/minion.sh https://raw.github.com/bbaumg/scripts/master/minion.sh' >> $v_mpc
+echo 'echo "Run MCP"' >> $v_mpc
+echo 'bash /var/scripts/minion.sh' >> $v_mpc
 
 #Configure the NIC card
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
