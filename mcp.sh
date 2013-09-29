@@ -12,11 +12,10 @@ if [ "$v_status" = "UPDATE" ]; then
   wget --output-document=/var/scripts/mcp.sh https://raw.github.com/bbaumg/scripts/master/mcp.sh
   echo "RUN" > $v_control
   bash "/var/scripts/mcp.sh"
-  exit1
+  exit 1
 elif [ "$v_status" = "RUN" ]; then
-
+  exit 1
 fi
-
 
 
 echo "Updating issue"
