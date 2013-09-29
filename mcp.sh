@@ -13,7 +13,7 @@ if [ "$v_status" = "UPDATE" ]; then
   echo "RUN" > $v_control
   bash "/var/scripts/mcp.sh"
   exit1
-else if [ "$v_status" = "RUN" ]; then
+elif [ "$v_status" = "RUN" ]; then
 
 fi
 
