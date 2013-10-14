@@ -14,7 +14,8 @@ cp /etc/motd.sh /etc/motd.sh.$(date +"%Y%m%d%H%M%S")
 
 echo "YUM update"
 yum update -y
-echo "cleanup installs"
+echo "Cleanup installs"
 yum clean all
 
+echo "$(date)"
 echo "Minion is done working"
