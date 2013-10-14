@@ -1,6 +1,7 @@
 #!/bin/bash
-
+echo '----------------------------------------------------------------------------------------'
 echo 'Minion is starting to run'
+echo "$(date)"
 echo "Updating banner"
 rm -f /etc/issue
 wget --output-document=/etc/issue https://raw.github.com/bbaumg/scripts/master/banner
