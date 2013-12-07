@@ -10,6 +10,13 @@ echo "echo \"Downloading firstrun.sh\"" >> $v_firstboot
 echo "wget --output-document=/etc/firstrun.sh https://raw.github.com/bbaumg/scripts/master/firstrun.sh" >> $v_firstboot
 echo "bash /etc/firstrun.sh"  >> $v_firstboot
 #cat /etc/firstboot.sh
+#Configure the NIC card
+eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
+echo "DEVICE=eth0" > $eth0
+echo "TYPE=Ethernet" >> $eth0
+echo "ONBOOT=yes" >> $eth0
+echo "NM_CONTROLLED=yes" >> $eth0
+echo "BOOTPROTO=dhcp" >> $eth0
 logrotate -f /etc/logrotate.conf
 cat /dev/null > /var/log/audit/audit.log
 cat /dev/null > /var/log/wtmp
