@@ -30,6 +30,9 @@ read gateway
 #read dns
 dns="8.8.8.8"
 
+#Enable eth0
+ifup eth0
+
 #Disable SELINUX
 echo "Disabling SELINUX" | tee -a $log
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
