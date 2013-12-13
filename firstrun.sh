@@ -58,6 +58,7 @@ echo "#-A INPUT -s 172.16.0.0/16 -m state --state NEW -p tcp --dport 1521 -j ACC
 echo "# Example SSH Access" >> $ipt
 echo "#-A INPUT -s 69.196.253.30/32 -m state --state NEW -p tcp --dport 22 -j ACCEPT" >> $ipt
 echo "#-A INPUT -s 67.53.65.246/32 -m state --state NEW -p tcp --dport 22 -j ACCEPT" >> $ipt
+echo "-A INPUT -s 10.15.81.0/24 -m state --state NEW -p tcp --dport 22 -j ACCEPT" >> $ipt
 echo "" >> $ipt
 echo "#SNMP" >> $ipt
 echo "-A INPUT -p udp --dport 161 -j ACCEPT" >> $ipt
