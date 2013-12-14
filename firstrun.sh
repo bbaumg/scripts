@@ -86,7 +86,7 @@ echo "Configuring sudoers" | tee -a $log
 echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 # Setup MOTD to run at login
-echo "bash /etc/motd.sh" >> /etc/bashrc
+echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
 #Update, upgrade, and install apps
 echo "YUM update" | tee -a $log
