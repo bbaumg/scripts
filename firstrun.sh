@@ -31,7 +31,7 @@ read gateway
 dns="8.8.8.8"
 
 #Enable eth0
-ifup eth0
+#ifup eth0  #This should no longer be needed.
 
 #Disable SELINUX
 echo "Disabling SELINUX" | tee -a $log
