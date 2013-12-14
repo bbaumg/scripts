@@ -106,7 +106,8 @@ echo 'echo "Starting MCP (Minion Control Program)"' >> $v_mpc
 echo 'echo "Getting the most up to date minion.sh"' >> $v_mpc
 echo 'wget --output-document=/var/scripts/minion.sh https://raw.github.com/bbaumg/scripts/master/minion.sh' >> $v_mpc
 echo 'echo "Run MCP"' >> $v_mpc
-echo 'bash /var/scripts/mcp.sh 2>&1 | tee -a /var/log/mcp.log' >> $v_mpc
+echo 'bash /var/scripts/minion.sh 2>&1 | tee -a /var/log/minion.log' >> $v_mpc
+bash /var/scripts/mcp.sh
 
 #Configure the NIC card
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
