@@ -42,6 +42,7 @@ sshconf="/etc/ssh/sshd_config"
 sed -i 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
 sed -i 's/#Banner\ none/Banner\ \/etc\/issue/g' $sshconf
 sed -i 's/GSSAPIAuthentication\ yes/GSSAPIAuthentication\ no/g' $sshconf
+service sshd restart
 
 #Configure IP Tables
 ipt="/etc/sysconfig/iptables"
