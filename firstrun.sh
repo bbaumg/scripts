@@ -99,7 +99,7 @@ yum update -y | tee -a $log
 echo "YUM upgrade" | tee -a $log
 yum upgrade -y | tee -a $log
 echo "Install apps" | tee -a $log
-yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget man ntsysv ntp traceroute lynx ftp sudoers curl git | tee -a $log
+yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git | tee -a $log
 echo "cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
