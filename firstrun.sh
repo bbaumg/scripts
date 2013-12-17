@@ -18,7 +18,7 @@ passwd $admin
 # Collecting system information
 echo -n "Enter the hostname [ENTER]: "
 read v_hostname
-hostname $v_hostname
+#hostname $v_hostname
 echo -n "Enter the IP address [ENTER]: "
 read ipaddr
 #echo -n "Enter the subnet mask [ENTER]: "
@@ -29,6 +29,9 @@ read gateway
 #echo -n "Enter the DNS [ENTER]: "
 #read dns
 dns="8.8.8.8"
+
+# Set the Hostname
+sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
 
 #Enable eth0
 #ifup eth0  #This should no longer be needed.
