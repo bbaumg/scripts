@@ -29,4 +29,5 @@ rm -rf /etc/udev/rules.d/70-*
 echo "bash /etc/firstboot.sh"  >> /etc/rc.local
 #cat /etc/rc.local
 unset HISTFILE
-sys-unconfig
+#sys-unconfig
+poweroff
