@@ -5,6 +5,8 @@ if [ -f "$log" ]; then
         exit 1
 fi
 
+# Set root Password
+passwd
 # Setting up the first Admin
 echo -n "Enter the first admin uername [ENTER]: "
 read admin
