@@ -14,7 +14,7 @@ cp /etc/motd.sh /etc/motd.sh.$(date +"%Y%m%d%H%M%S")
 
 echo "Getting scripts:"
 echo "  create_ssl_cert.sh"
-wget --output-document=/var/scritps/create_ssl_cert.sh https://raw.github.com/bbaumg/scripts/master/create_ssl_cert.sh
+wget --output-document=/var/scripts/create_ssl_cert.sh https://raw.github.com/bbaumg/scripts/master/create_ssl_cert.sh
 
 echo "YUM update"
 yum update -y
