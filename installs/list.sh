@@ -20,6 +20,7 @@ elif [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')" ] && \
         #v_install="$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')"
         #echo "$v_install"
         v_install="curl -sL $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}') | bash 2>&1 | tee $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')
+        echo "$v_install"
 else
         echo -e "\n\n\n\n\n***********************************************************************"
         echo -e "There was an Error finding the appliation you selected"
