@@ -1,5 +1,4 @@
-
-
+#!/bin/bash
 # List the systems to install 'NAME, URL, LOGFILE)
 
 v_apps[0]="None"
