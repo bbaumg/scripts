@@ -17,9 +17,9 @@ elif [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')" ] && \
      [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')" ] && \
      [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')" ]; then
         echo -en "Installing $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')...  Please wait while the install script is downloaded\n\n"
-        v_install="$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')"
-        echo "$v_install"
-        #curl -sL $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}') | bash 2>&1 | tee $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')
+        #v_install="$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')"
+        #echo "$v_install"
+        v_install="curl -sL $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}') | bash 2>&1 | tee $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')
 else
         echo -e "\n\n\n\n\n***********************************************************************"
         echo -e "There was an Error finding the appliation you selected"
