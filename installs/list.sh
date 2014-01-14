@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 # List the systems to install 'NAME, URL, LOGFILE)
 
