@@ -19,7 +19,8 @@ elif [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')" ] && \
         echo -en "Installing $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')...  Please wait while the install script is downloaded\n\n"
         #v_install="$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')"
         #echo "$v_install"
-        v_install="curl -sL $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}') | bash 2>&1 | tee $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')"
+        #v_install="curl -sL $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}') | bash 2>&1 | tee $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')"
+        v_install="${v_apps[$v_app]}"
         echo "$v_install"
 else
         echo -e "\n\n\n\n\n***********************************************************************"
