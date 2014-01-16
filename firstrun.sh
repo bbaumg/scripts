@@ -30,9 +30,9 @@ read gateway
 #read dns
 dns="8.8.8.8"
 # Install any apps?
-echo -n "Template Applications:\n  [1=Redmine]\nShould we install an app [0-9]: "
-read v_app
-v_app_1='https://raw.github.com/bbaumg/scripts/master/installs/redmine2.4.s_my-lo_v1.0.sh'
+#echo -n "Template Applications:\n  [1=Redmine]\nShould we install an app [0-9]: "
+#read v_app
+#v_app_1='https://raw.github.com/bbaumg/scripts/master/installs/redmine2.4.s_my-lo_v1.0.sh'
 
 # Set the Hostname
 sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
@@ -108,7 +108,7 @@ echo "cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
 # Install custom apps
-curl -L $v_app_1 | bash 2>&1 | tee 
+#curl -L $v_app_1 | bash 2>&1 | tee 
 
 #Install the MCP
 v_mpc="/var/scripts/mcp.sh"
