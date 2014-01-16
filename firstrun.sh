@@ -108,7 +108,7 @@ echo "cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
 # Install custom apps
-curl -L $v_app_1 | bash
+curl -L $v_app_1 | bash 2>&1 | tee 
 
 #Install the MCP
 v_mpc="/var/scripts/mcp.sh"
