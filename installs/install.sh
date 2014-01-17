@@ -4,9 +4,7 @@ log="/var/log/installs.log"
 c_dir='/var/scripts/installs'
 install="$c_dir/install.run"
 github="https://raw.github.com/bbaumg/scripts/master/installs"
-if [ -f "$log" ]; then
-        exit 1
-fi
+#if [ -f "$log" ]; then exit 1; fi
 
 if [ -f "$install" ]; then
         v_app[0]="$(cat $install | awk -F ', ' '{print $1}')"
