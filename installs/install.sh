@@ -7,6 +7,7 @@ github="https://raw.github.com/bbaumg/scripts/master/installs"
 if [ -f "$log" ]; then
         exit 1
 fi
+echo "running"
 
 if [ -f $install ]; then
         v_app[0]="$(grep v_apps $install) | awk -F ', ' '{print $1}'"
