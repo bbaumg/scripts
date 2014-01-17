@@ -39,8 +39,6 @@ else
                 echo "${v_apps[$v_app]}" | tee $install
                 echo "curl -sL $github/install.sh | bash 2>&1 | tee $log"  >> /etc/rc.local
                 #shutdown -r now
-        
-        
         else
                 echo -e "\n\n\n\n\n***********************************************************************"
                 echo -e "There was an Error finding the appliation you selected"
