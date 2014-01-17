@@ -45,20 +45,3 @@ else
                 echo -e "***********************************************************************\n\n\n\n\n"
         fi
 fi
-
-
-
-
-
-        #v_install="$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')"
-        #echo "$v_install"
-        #v_install="curl -sL $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}') | bash 2>&1 | tee $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')"
-        #v_install="${v_apps[$v_app]}"
-        #echo "$v_install"
-
-# here is the theory
-#  define the app to install and write to a file
-#  Then reboot
-#  After reboot, kick off the install script and look for the file.
-#  Then install the app.  If file does not exist, then just run the file from the top.  If the file does exist install.
-        
