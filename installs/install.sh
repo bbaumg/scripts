@@ -8,14 +8,12 @@ if [ -f "$log" ]; then
         exit 1
 fi
 
-
-mkdir -p $c_dir
 if [ -f "$install" ]; then
         echo "Installing"
         v_app[0]="$(grep v_apps $install) | awk -F ', ' '{print $1}'"
         v_app[1]="$(grep v_apps $install) | awk -F ', ' '{print $2}'"
         v_app[2]="$(grep v_apps $install) | awk -F ', ' '{print $3}'"
-        #echo "Installation selection found...  Installing $(echo ${v_app[0]}"
+        echo "Installation selection found...  Installing ${v_app[0]}"
         #curl -sL $(echo "${v_app[1]}" | bash 2>&1 | tee $(echo "${v_apps[2}" | awk -F', ' '{print $3}')"
 else
         echo "Listing"
@@ -41,6 +39,7 @@ else
              [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')" ]; then
                 echo "do something"
                 #echo -en "Installing $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')...  Please wait while the install script is downloaded\n\n"
+                mkdir -p $c_dir
                 echo "${v_apps[$v_app]}" | tee $install
                 #echo "curl -sL $github/install.sh | bash 2>&1 | tee $log"  >> /etc/rc.local
                 #shutdown -r now
