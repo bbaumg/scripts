@@ -10,6 +10,7 @@ fi
 
 if [ -f "$install" ]; then
         echo "Installing"
+        cat $install
         v_app[0]="$(grep v_apps $install) | awk -F ', ' '{print $1}'"
         v_app[1]="$(grep v_apps $install) | awk -F ', ' '{print $2}'"
         v_app[2]="$(grep v_apps $install) | awk -F ', ' '{print $3}'"
