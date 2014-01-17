@@ -7,6 +7,11 @@ github="https://raw.github.com/bbaumg/scripts/master/installs"
 if [ -f "$log" ]; then
         exit 1
 fi
+
+        echo -en "Should we install an app [0-9]: "
+        read v_app
+
+
 mkdir -p $c_dir
 if [ -f "$install" ]; then
         echo "Installing"
