@@ -8,6 +8,7 @@ if [ -f "$log" ]; then
         exit 1
 fi
 
+echo "$install"
 if [ -f "$install" ]; then
 echo "running"
         v_app[0]="$(grep v_apps $install) | awk -F ', ' '{print $1}'"
