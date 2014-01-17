@@ -9,7 +9,8 @@ if [ -f "$log" ]; then
 fi
 mkdir -p $c_dir
 if [ -f "$install" ]; then
-
+        echo "running"
 else
+        echo "finding"
 
 fi
