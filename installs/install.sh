@@ -7,7 +7,6 @@ github="https://raw.github.com/bbaumg/scripts/master/installs"
 if [ -f "$log" ]; then
         exit 1
 fi
-echo "running"
 
 if [ -f $install ]; then
         v_app[0]="$(grep v_apps $install) | awk -F ', ' '{print $1}'"
@@ -16,6 +15,7 @@ if [ -f $install ]; then
         echo "Installation selection found...  Installing $(echo ${v_app[0]}"
         #curl -sL $(echo "${v_app[1]}" | bash 2>&1 | tee $(echo "${v_apps[2}" | awk -F', ' '{print $3}')"
 else
+echo "running"
         source <(curl -sL "$github/list.sh")
         if [ -z ${v_apps[0]} ]; then
                 echo -e "\n\n\n\n\n***********************************************************************"
