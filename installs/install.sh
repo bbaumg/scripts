@@ -1,6 +1,6 @@
 #!/bin/bash
 
-log="/var/log/installs.log"
+#log="/var/log/installs.log"
 c_dir='/var/scripts/installs'
 install="$c_dir/install.run"
 github="https://raw.github.com/bbaumg/scripts/master/installs"
