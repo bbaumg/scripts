@@ -37,6 +37,7 @@ else
         elif [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')" ] && \
              [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')" ] && \
              [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')" ]; then
+                echo "do something"
                 #echo -en "Installing $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')...  Please wait while the install script is downloaded\n\n"
                 #echo "${v_apps[$v_app]}" | tee $install
                 #echo "curl -sL $github/install.sh | bash 2>&1 | tee $log"  >> /etc/rc.local
