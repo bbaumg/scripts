@@ -38,7 +38,7 @@ else
              [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')" ]; then
                 echo "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}') will install after the next reboot"
                 mkdir -p $c_dir
-                #echo "${v_apps[$v_app]}" | tee $install
+                echo "${v_apps[$v_app]}" | tee $install
                 echo "bash <(curl -sL $github/install.sh)" >> /etc/rc.local
                 echo "System is rebooting now...  Installation will begin when system resumes"
                 sleep 3
