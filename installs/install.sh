@@ -42,7 +42,7 @@ else
                 echo "bash <(curl -sL $github/install.sh)" >> /etc/rc.local
                 echo "System is rebooting now...  Installation will begin when system resumes"
                 sleep 3
-                shutdown -r now
+                reboot
         else
                 echo -e "\n\n\n\n\n***********************************************************************"
                 echo -e "There was an Error finding the appliation you selected"
