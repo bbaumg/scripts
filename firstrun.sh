@@ -143,5 +143,5 @@ echo "DNS=$dns" >> $eth0
 service network restart
 
 #Cleanup and reboot
-awk '!/firstboot/' /etc/rc.local
+awk '!/firstboot/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
 shutdown -r now
