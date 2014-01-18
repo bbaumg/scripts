@@ -36,12 +36,12 @@ else
         elif [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')" ] && \
              [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $2}')" ] && \
              [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')" ]; then
-                echo "do something"
-                #echo -en "Installing $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')...  Please wait while the install script is downloaded\n\n"
+                echo "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}') will install after the next reboot"
                 mkdir -p $c_dir
-                echo "${v_apps[$v_app]}" | tee $install
+                #echo "${v_apps[$v_app]}" | tee $install
                 echo "bash <(curl -sL $github/install.sh)" >> /etc/rc.local
-                #shutdown -r now
+                echo "System is rebooting now...  Installation will begin when system resumes"
+                shutdown -r now
         else
                 echo -e "\n\n\n\n\n***********************************************************************"
                 echo -e "There was an Error finding the appliation you selected"
