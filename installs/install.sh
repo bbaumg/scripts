@@ -11,10 +11,11 @@ if [ -f "$install" ]; then
         v_app[1]="$(cat $install | awk -F ', ' '{print $2}')"
         v_app[2]="$(cat $install | awk -F ', ' '{print $3}')"
         echo "Installation selection found...  Installing ${v_app[0]}"
+        awk '!/install.sh/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
+        rm -f $install
         bash <(curl -sL ${v_app[1]}) 2>&1 | tee ${v_app[2]}
         #curl -sL $(echo "${v_app[1]}" | bash 2>&1 | tee $(echo "${v_apps[2}" | awk -F', ' '{print $3}')"
 else
-        echo "Listing"
         source <(curl -sL "$github/list.sh")
         if [ -z ${v_apps[0]} ]; then
                 echo -e "\n\n\n\n\n***********************************************************************"
@@ -39,7 +40,7 @@ else
                 #echo -en "Installing $(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}')...  Please wait while the install script is downloaded\n\n"
                 mkdir -p $c_dir
                 echo "${v_apps[$v_app]}" | tee $install
-                #echo "curl -sL $github/install.sh | bash 2>&1 | tee $log"  >> /etc/rc.local
+                echo "bash <(curl -sL $github/install.sh)" >> /etc/rc.local
                 #shutdown -r now
         else
                 echo -e "\n\n\n\n\n***********************************************************************"
