@@ -6,6 +6,8 @@ if [ -f "$log" ]; then
 fi
 
 # Setting up the first Admin
+echo "Set a new root password"
+passwd
 echo -n "Enter the first admin uername [ENTER]: "
 read admin
 #Create user groups
@@ -30,6 +32,7 @@ read gateway
 #read dns
 dns="8.8.8.8"
 # Install any apps?
+bash <(curl -sL 'https://raw.github.com/bbaumg/scripts/master/installs/install.sh')
 #echo -n "Template Applications:\n  [1=Redmine]\nShould we install an app [0-9]: "
 #read v_app
 #v_app_1='https://raw.github.com/bbaumg/scripts/master/installs/redmine2.4.s_my-lo_v1.0.sh'
