@@ -11,7 +11,8 @@ if [ -f "$install" ]; then
         v_app[1]="$(cat $install | awk -F ', ' '{print $2}')"
         v_app[2]="$(cat $install | awk -F ', ' '{print $3}')"
         echo "Installation selection found...  Installing ${v_app[0]}"
-        awk '!/install.sh/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
+        #awk '!/install.sh/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
+        sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f $install
         bash <(curl -sL ${v_app[1]}) 2>&1 | tee ${v_app[2]}
         #curl -sL $(echo "${v_app[1]}" | bash 2>&1 | tee $(echo "${v_apps[2}" | awk -F', ' '{print $3}')"
