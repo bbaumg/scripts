@@ -17,10 +17,10 @@ echo "bash /etc/firstrun.sh" >> $rc
 #echo "bash <(curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh)" >> $rc
 
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
-echo "DEVICE=eth0"\
-"TYPE=Ethernet"\
-"ONBOOT=yes"\
-"NM_CONTROLLED=yes"\
+echo -e "DEVICE=eth0\n"\
+"TYPE=Ethernet\n"\
+"ONBOOT=yes\n"\
+"NM_CONTROLLED=yes\n"\
 "BOOTPROTO=dhcp" > $eth0
 logrotate -f /etc/logrotate.conf
 cat /dev/null > /var/log/audit/audit.log
