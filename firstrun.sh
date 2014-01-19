@@ -6,8 +6,8 @@ if [ -f "$log" ]; then
 fi
 
 # Setting up the first Admin
-echo "Set a new root password"
-passwd
+#echo "Set a new root password"
+#passwd
 echo -n "Enter the first admin uername [ENTER]: "
 read admin
 #Create user groups
