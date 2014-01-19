@@ -10,7 +10,6 @@ echo "echo \"Downloading firstrun.sh\"" >> $v_firstboot
 echo "wget --output-document=/etc/firstrun.sh https://raw.github.com/bbaumg/scripts/master/firstrun.sh" >> $v_firstboot
 echo "bash /etc/firstrun.sh"  >> $v_firstboot
 cat /etc/firstboot.sh
-Configure the NIC card
 #rc='/etc/rc.local'
 #echo "curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh > /etc/firstrun.sh" >> $rc
 #echo "chmod 755 /etc/firstrun.sh" >> $rc
@@ -18,6 +17,7 @@ Configure the NIC card
 
 #echo "bash <(curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh)" >> $rc
 
+#Configure the NIC card
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
 echo -e "DEVICE=eth0\n"\
 "TYPE=Ethernet\n"\
