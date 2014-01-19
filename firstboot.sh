@@ -12,14 +12,16 @@
 #cat /etc/firstboot.sh
 #Configure the NIC card
 rc='/etc/rc.local'
-echo "bash <(curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh)" >> $rc
+echo "curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh > /etc/firstrun.sh" >> $rc
+echo "bash /etc/firstrun.sh" >> $rc
+#echo "bash <(curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh)" >> $rc
 
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
-echo "DEVICE=eth0" > $eth0
-echo "TYPE=Ethernet" >> $eth0
-echo "ONBOOT=yes" >> $eth0
-echo "NM_CONTROLLED=yes" >> $eth0
-echo "BOOTPROTO=dhcp" >> $eth0
+echo "DEVICE=eth0"\
+"TYPE=Ethernet"\
+"ONBOOT=yes"\
+"NM_CONTROLLED=yes"\
+"BOOTPROTO=dhcp" > $eth0
 logrotate -f /etc/logrotate.conf
 cat /dev/null > /var/log/audit/audit.log
 cat /dev/null > /var/log/wtmp
@@ -33,4 +35,4 @@ rm -rf /etc/udev/rules.d/70-*
 #cat /etc/rc.local
 unset HISTFILE
 #sys-unconfig
-poweroff
+#poweroff
