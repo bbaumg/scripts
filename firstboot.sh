@@ -9,7 +9,8 @@ echo "yum install -y wget" >> $v_firstboot
 echo "echo \"Downloading firstrun.sh\"" >> $v_firstboot
 echo "wget --output-document=/etc/firstrun.sh https://raw.github.com/bbaumg/scripts/master/firstrun.sh" >> $v_firstboot
 echo "bash /etc/firstrun.sh"  >> $v_firstboot
-cat /etc/firstboot.sh
+
+#cat /etc/firstboot.sh
 #rc='/etc/rc.local'
 #echo "curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh > /etc/firstrun.sh" >> $rc
 #echo "chmod 755 /etc/firstrun.sh" >> $rc
@@ -24,6 +25,10 @@ echo -e "DEVICE=eth0\n"\
 "ONBOOT=yes\n"\
 "NM_CONTROLLED=yes\n"\
 "BOOTPROTO=dhcp" > $eth0
+
+# Adjust rc.sysinit so sys-unconfig does not prompt for auth type
+sed -i --follow-symlinks 's/authconfig-tui\ --nostart/authconfig-tui\ --nostart\ --kickstart/g' /etc/rc.sysinit
+
 logrotate -f /etc/logrotate.conf
 cat /dev/null > /var/log/audit/audit.log
 cat /dev/null > /var/log/wtmp
@@ -36,5 +41,4 @@ rm -rf /etc/udev/rules.d/70-*
 echo "bash /etc/firstboot.sh"  >> /etc/rc.local
 #cat /etc/rc.local
 unset HISTFILE
-#sys-unconfig
-#poweroff
+sys-unconfig
