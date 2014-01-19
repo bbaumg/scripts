@@ -13,7 +13,7 @@
 #Configure the NIC card
 rc='/etc/rc.local'
 echo "curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh > /etc/firstrun.sh" >> $rc
-echo "bash /etc/firstrun.sh" >> $rc
+echo "/etc/firstrun.sh" >> $rc
 chmod 755 /etc/firstrun.sh
 #echo "bash <(curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh)" >> $rc
 
