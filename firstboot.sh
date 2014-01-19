@@ -4,11 +4,12 @@ echo -n ! >> $v_firstboot
 echo "/bin/bash" >> $v_firstboot
 echo "echo \"Starting the NIC\"" >> $v_firstboot
 echo "ifup eth0"  >> $v_firstboot
-echo "echo \"Installing wget\"" >> $v_firstboot
-echo "yum install -y wget" >> $v_firstboot
+#echo "echo \"Installing wget\"" >> $v_firstboot
+#echo "yum install -y wget" >> $v_firstboot
 echo "echo \"Downloading firstrun.sh\"" >> $v_firstboot
-echo "wget --output-document=/etc/firstrun.sh https://raw.github.com/bbaumg/scripts/master/firstrun.sh" >> $v_firstboot
-echo "bash /etc/firstrun.sh"  >> $v_firstboot
+#echo "wget --output-document=/etc/firstrun.sh https://raw.github.com/bbaumg/scripts/master/firstrun.sh" >> $v_firstboot
+echo "bash <(curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh)" >> $v_firstboot
+#echo "bash /etc/firstrun.sh"  >> $v_firstboot
 #cat /etc/firstboot.sh
 #Configure the NIC card
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
