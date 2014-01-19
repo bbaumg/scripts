@@ -3,43 +3,6 @@
 log="/var/log/firstboot.log"
 if [ -f "$log" ]; then
         exit 1
-else
-    if [ -x /usr/bin/rhgb-client ] && /usr/bin/rhgb-client --ping ; then
-        chvt 1
-    fi
-
-    if [ -x /usr/bin/system-config-keyboard ]; then
-        /usr/bin/system-config-keyboard
-    fi
-    if [ -x /usr/bin/passwd ]; then
-        /usr/bin/passwd root
-    fi
-    if [ -x /usr/sbin/netconfig ]; then
-        /usr/sbin/netconfig
-    fi
-    if [ -x /usr/sbin/timeconfig ]; then
-        /usr/sbin/timeconfig
-    fi
-    if [ -x /usr/sbin/authconfig ]; then
-        /usr/sbin/authconfig --nostart
-    fi
-    if [ -x /usr/sbin/ntsysv ]; then
-        /usr/sbin/ntsysv --level 35
-    fi
-
-    # Reread in network configuration data.
-    if [ -f /etc/sysconfig/network ]; then
-        . /etc/sysconfig/network
-
-        # Reset the hostname.
-        action $"Resetting hostname ${HOSTNAME}: " hostname ${HOSTNAME}
-    fi
-
-    rm -f /.unconfigured
-
-    if [ -x /usr/bin/rhgb-client ] && /usr/bin/rhgb-client --ping ; then
-        chvt 8
-    fi
 fi
 
 # Setting up the first Admin
