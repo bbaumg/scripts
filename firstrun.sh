@@ -5,6 +5,8 @@ if [ -f "$log" ]; then
         exit 1
 fi
 
+chvt 1
+
 # Setting up the first Admin
 #echo "Set a new root password"
 #passwd
