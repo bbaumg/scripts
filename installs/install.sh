@@ -43,7 +43,7 @@ else
                 echo "bash <(curl -sL $c_repo/install.sh)" >> /etc/rc.local
                 echo "System is rebooting now...  Installation will begin when system resumes"
                 sleep 3
-                if [ -z "$1" ]; then reboot; fi
+                if [ "$1" != 'firstboot' ]; then reboot; fi
         else
                 echo -e "\n\n\n\n\n***********************************************************************"
                 echo -e "There was an Error finding the appliation you selected"
