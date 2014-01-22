@@ -146,4 +146,5 @@ service network restart
 #Cleanup and reboot
 #awk '!/firstboot/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
 sed -i --follow-symlinks '/firstboot/d' /etc/rc.local
+sed -i --follow-symlinks '/firstrun/d' /etc/rc.local
 shutdown -r now
