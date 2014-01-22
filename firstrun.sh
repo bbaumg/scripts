@@ -4,7 +4,7 @@ log="/var/log/firstboot.log"
 if [ -f "$log" ]; then
         exit 1
 fi
-
+clear
 # Setting up the first Admin
 #echo "Set a new root password"
 #passwd
