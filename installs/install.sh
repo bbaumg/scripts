@@ -41,7 +41,8 @@ else
                 mkdir -p $c_dir
                 echo "${v_apps[$v_app]}" | tee $install
                 echo "bash <(curl -sL $c_repo/install.sh)" >> /etc/rc.local
-                echo "System is rebooting now...  Installation will begin when system resumes"
+                echo "Installation will begin when system resumes from the next reboot"
+                if [ "$1" != 'firstboot' ]; then echo -n "System is rebooting now...  "
                 sleep 3
                 if [ "$1" != 'firstboot' ]; then reboot; fi
         else
