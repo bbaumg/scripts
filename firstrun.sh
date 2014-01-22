@@ -21,13 +21,27 @@ passwd $admin
 echo -n "Enter the hostname [ENTER]: "
 read v_hostname
 #hostname $v_hostname
-echo -n "Enter the IP address [ENTER]: "
-read ipaddr
+until [ $val_ipaddr ]; do
+        echo -n "Enter the IP address [ENTER]: "
+        read ipaddr
+        if [[ ! $ipaddr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+                echo "That is not a valid address...  Please enter it again."
+        else
+                val_ipaddr=true
+        fi
+done
 #echo -n "Enter the subnet mask [ENTER]: "
 #read netmask
 netmask="255.255.255.0"
-echo -n "Enter the gateway [ENTER]: "
-read gateway
+utnil [ $val_gateway ]; do
+        echo -n "Enter the gateway [ENTER]: "
+        read gateway
+        if [[ ! $gateway =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+                echo "That is not a valid address...  Please enter it again."
+        else
+                val_gateway=true
+        fi
+done        
 #echo -n "Enter the DNS [ENTER]: "
 #read dns
 dns="8.8.8.8"
