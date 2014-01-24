@@ -46,7 +46,7 @@ else
                 echo "bash $c_repo/install.sh" >> $rc
 #                echo "bash <(curl -sL $c_repo/install.sh)" >> /etc/rc.local
 #                echo "Installation will begin when system resumes from the next reboot"
-                if [ "$1" != 'firstboot' ]; then echo -n "System is rebooting now...  "
+                if [ "$1" != 'firstboot' ]; then echo -n "System is rebooting now...  "; fi
                 sleep 3
                 if [ "$1" != 'firstboot' ]; then reboot; fi
         else
