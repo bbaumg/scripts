@@ -5,21 +5,23 @@ if [ -f "$log" ]; then
         exit 1
 fi
 clear
+echo -en "Beginning base configuration...\n\n"
 # Setting up the first Admin
 #echo "Set a new root password"
 #passwd
-echo -n "Enter the first admin uername [ENTER]: "
+echo -n "Enter the first admin's uername [ENTER]: "
 read admin
 #Create user groups
 echo "Adding admins" | tee -a $log
 groupadd admins
 useradd --groups admins $admin
-echo "Enter the first admin’s password:"
+echo "\nEnter the first admin’s password:"
 passwd $admin
 
 # Collecting system information
-echo -n "Enter the hostname [ENTER]: "
+echo -n "\nEnter the hostname [ENTER]: "
 read v_hostname
+v_hostname=${v_hostname^^}
 #hostname $v_hostname
 until [ $val_ipaddr ]; do
         echo -n "Enter the IP address [ENTER]: "
@@ -33,7 +35,7 @@ done
 #echo -n "Enter the subnet mask [ENTER]: "
 #read netmask
 netmask="255.255.255.0"
-utnil [ $val_gateway ]; do
+until [ $val_gateway ]; do
         echo -n "Enter the gateway [ENTER]: "
         read gateway
         if [[ ! $gateway =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
