@@ -9,17 +9,18 @@ echo -en "Beginning base configuration...\n\n"
 # Setting up the first Admin
 #echo "Set a new root password"
 #passwd
-echo -n "Enter the first admin's uername [ENTER]: "
+echo -en "Enter the first admin's uername [ENTER]: "
 read admin
 #Create user groups
 echo "Adding admins" | tee -a $log
 groupadd admins
 useradd --groups admins $admin
-echo "\nEnter the first admin’s password:"
+#echo -en "\nEnter the first admin’s password:"
+echo
 passwd $admin
 
 # Collecting system information
-echo -n "\nEnter the hostname [ENTER]: "
+echo -en "\nEnter the hostname [ENTER]: "
 read v_hostname
 v_hostname=${v_hostname^^}
 #hostname $v_hostname
