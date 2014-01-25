@@ -4,6 +4,7 @@ log="/var/log/firstboot.log"
 
 # Verify it has not run before
 if [ -f "$log" ]; then exit 1; fi
+source /etc/init.d/functions
 clear
 
 # Setup initial admin and groups
@@ -32,10 +33,10 @@ until [ $val_ipaddr ]; do
                 val_ipaddr=true
         fi
 done
-netmask="255.255.255.0"
 until [ $val_netmask ]; do
-        echo -n "Enter the netmask [ENTER]: "
-        read netmask
+        #echo -n "Enter the netmask [ENTER]: "
+        #read netmask
+        netmask='255.255.255.0'
         if [[ ! $netmask =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
                 echo "That is not a valid address...  Please enter it again."
         else
