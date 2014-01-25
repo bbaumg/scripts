@@ -1,14 +1,13 @@
 #!/bin/bash
 #Variables
 log="/var/log/firstboot.log"
-if [ -f "$log" ]; then
-        exit 1
-fi
+
+# Verify it has not run before
+if [ -f "$log" ]; then exit 1; fi
 clear
+
+# Setup initial admin and groups
 echo -en "Beginning base configuration...\n\n"
-# Setting up the first Admin
-#echo "Set a new root password"
-#passwd
 echo -en "Enter the first admin's uername [ENTER]: "
 read admin
 #Create user groups
@@ -33,9 +32,16 @@ until [ $val_ipaddr ]; do
                 val_ipaddr=true
         fi
 done
-#echo -n "Enter the subnet mask [ENTER]: "
-#read netmask
 netmask="255.255.255.0"
+until [ $val_netmask ]; do
+        echo -n "Enter the netmask [ENTER]: "
+        read netmask
+        if [[ ! $netmask =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+                echo "That is not a valid address...  Please enter it again."
+        else
+                val_netmask=true
+        fi
+done       
 until [ $val_gateway ]; do
         echo -n "Enter the gateway [ENTER]: "
         read gateway
