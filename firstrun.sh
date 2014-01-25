@@ -58,6 +58,9 @@ sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
 #Enable eth0
 #ifup eth0  #This should no longer be needed.
 
+#Set grub to show messages during boot
+sed -i 's/rhgb\ //g' /etc/grub.conf
+
 #Disable SELINUX
 echo "Disabling SELINUX" | tee -a $log
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
