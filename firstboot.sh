@@ -14,6 +14,8 @@
 #cat /etc/rc.local
 
 rc='/etc/rc.local'
+sed -i --follow-symlinks '/firstboot/d' $rc
+sed -i --follow-symlinks '/firstrun/d' $rc
 echo "curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh > /etc/firstrun.sh" >> $rc
 echo "chmod 755 /etc/firstrun.sh" >> $rc
 echo "bash /etc/firstrun.sh" >> $rc
@@ -30,6 +32,7 @@ echo -e "DEVICE=eth0\n"\
 # Adjust rc.sysinit so sys-unconfig does not prompt for auth type
 sed -i --follow-symlinks 's/authconfig-tui\ --nostart/authconfig-tui\ --nostart\ --kickstart/g' /etc/rc.sysinit
 
+rm -f /var/log/firstboot.log
 logrotate -f /etc/logrotate.conf
 cat /dev/null > /var/log/audit/audit.log
 cat /dev/null > /var/log/wtmp
