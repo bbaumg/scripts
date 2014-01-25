@@ -15,6 +15,10 @@ sleep 1
 echo -en "."
 sleep 1
 echo -en "."
-sleep 3
+sleep 1
+echo -en "."
+sleep 1
+echo -en "."
+sleep 1
 success; echo
-
+sleep 3
