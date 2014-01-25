@@ -1,7 +1,20 @@
 #!/bin/bash
-echo "installing Test..   Woot"
+source /etc/init.d/functions
+echo -en "installing Test..   Woot"
+sleep 1
+echo -en "."
+sleep 1
+echo -en "."
+sleep 1
+echo -en "."
+sleep 1
+echo -en "."
+sleep 1
+echo -en "."
+sleep 1
+echo -en "."
+sleep 1
+echo -en "."
 sleep 3
-echo "1"
-sleep 3
-echo "2"
-echo $1
+success; echo
+
