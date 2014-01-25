@@ -42,8 +42,8 @@ else
                 echo "${v_apps[$v_app]}" > $install
                 rc='/etc/rc.local'
                 echo "curl -sL $c_repo/install.sh > $c_dir/install.sh" >> $rc
-                echo "chmod 755 $c_repo/install.sh" >> $rc
-                echo "bash $c_repo/install.sh" >> $rc
+                echo "chmod 755 $c_dir/install.sh" >> $rc
+                echo "bash $c_dir/install.sh" >> $rc
 #                echo "bash <(curl -sL $c_repo/install.sh)" >> /etc/rc.local
 #                echo "Installation will begin when system resumes from the next reboot"
                 if [ "$1" != 'firstboot' ]; then echo -n "System is rebooting now...  "; fi
