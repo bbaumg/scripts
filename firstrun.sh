@@ -65,17 +65,17 @@ sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
 #ifup eth0  #This should no longer be needed.
 
 #Set grub to show messages during boot
-sed -i 's/rhgb\ //g' /etc/grub.conf
+sed -i --follow-symlinks 's/rhgb\ //g' /etc/grub.conf
 
 #Disable SELINUX
 echo "Disabling SELINUX" | tee -a $log
-sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 #Secure SSH
 sshconf="/etc/ssh/sshd_config"
-sed -i 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
-sed -i 's/#Banner\ none/Banner\ \/etc\/issue/g' $sshconf
-sed -i 's/GSSAPIAuthentication\ yes/GSSAPIAuthentication\ no/g' $sshconf
+sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
+sed -i --follow-symlinks 's/#Banner\ none/Banner\ \/etc\/issue/g' $sshconf
+sed -i --follow-symlinks 's/GSSAPIAuthentication\ yes/GSSAPIAuthentication\ no/g' $sshconf
 service sshd restart
 
 #Configure IP Tables
