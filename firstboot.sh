@@ -8,7 +8,7 @@ sed -i --follow-symlinks '/firstboot/d' $rc
 sed -i --follow-symlinks '/firstrun/d' $rc
 echo "curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh > /etc/firstrun.sh" >> $rc
 echo "chmod 755 /etc/firstrun.sh" >> $rc
-echo "bash /etc/firstrun.sh | tee /var/log/firstboot.log" >> $rc
+echo "bash /etc/firstrun.sh" >> $rc
 
 # Configure the NIC card for a general DHCP initial boot
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
