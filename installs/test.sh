@@ -1,5 +1,4 @@
 #!/bin/bash
-clear
 source /etc/init.d/functions
 echo -en "installing Test..   Woot"
 sleep 1
