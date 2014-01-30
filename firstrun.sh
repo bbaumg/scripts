@@ -51,7 +51,14 @@ until [ $val_gateway ]; do
         else
                 val_gateway=true
         fi
-done        
+done
+echo -en "On net or Off [0=Off, 1=On}"
+read onnet
+if [ "$onnet" = "1" ]; then
+        dns="DNS1=172.16.121.19"
+else
+        dns="DNS=8.8.8.8"    
+fi
 #echo -n "Enter the DNS [ENTER]: "
 #read dns
 dns="8.8.8.8"
@@ -167,7 +174,7 @@ echo "BOOTPROTO=none" >> $eth0
 echo "IPADDR=$ipaddr" >> $eth0
 echo "NETMASK=$netmask" >> $eth0
 echo "GATEWAY=$gateway" >> $eth0
-echo "DNS=$dns" >> $eth0
+echo "$dns" >> $eth0
 service network restart
 
 #Cleanup and reboot
