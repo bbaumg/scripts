@@ -55,7 +55,7 @@ done
 echo -en "On net or Off [0=Off, 1=On}"
 read onnet
 if [ "$onnet" = "1" ]; then
-        dns="DNS1=172.16.121.19"
+        dns="DNS1=172.16.121.19\nDNS2=172.16.121.41\nDNS3=172.16.0.57\nDNS4=172.16.1.40"
 else
         dns="DNS=8.8.8.8"    
 fi
@@ -163,18 +163,18 @@ if [ ! -f "$eth0" ]; then
         cp -f $eth0 $eth0.backup
 fi
 rm -rf /etc/udev/rules.d/70-*
-mac=$(cat /sys/class/net/eth0/address)
 echo "Configuring the NIC:" | tee -a $log
-echo "DEVICE=eth0" > $eth0
-echo "TYPE=Ethernet" >> $eth0
-echo "ONBOOT=yes" >> $eth0
-echo "NM_CONTROLLED=yes" >> $eth0
-echo "HWADDR=$mac" >> $eth0
-echo "BOOTPROTO=none" >> $eth0
-echo "IPADDR=$ipaddr" >> $eth0
-echo "NETMASK=$netmask" >> $eth0
-echo "GATEWAY=$gateway" >> $eth0
-echo "$dns" >> $eth0
+mac=$(cat /sys/class/net/eth0/address)
+echo -en "DEVICE=eth0"\
+"TYPE=Ethernet"\
+"ONBOOT=yes"\
+"NM_CONTROLLED=yes"\
+"HWADDR=$mac"\
+"BOOTPROTO=none"\
+"IPADDR=$ipaddr"\
+"NETMASK=$netmask"\
+"GATEWAY=$gateway"\
+"$dns" > $eth0
 service network restart
 
 #Cleanup and reboot
