@@ -165,15 +165,15 @@ fi
 rm -rf /etc/udev/rules.d/70-*
 echo "Configuring the NIC:" | tee -a $log
 mac=$(cat /sys/class/net/eth0/address)
-echo -en "DEVICE=eth0"\
-"TYPE=Ethernet"\
-"ONBOOT=yes"\
-"NM_CONTROLLED=yes"\
-"HWADDR=$mac"\
-"BOOTPROTO=none"\
-"IPADDR=$ipaddr"\
-"NETMASK=$netmask"\
-"GATEWAY=$gateway"\
+echo -en "DEVICE=eth0\n"\
+"TYPE=Ethernet\n"\
+"ONBOOT=yes\n"\
+"NM_CONTROLLED=yes\n"\
+"HWADDR=$mac\n"\
+"BOOTPROTO=none\n"\
+"IPADDR=$ipaddr\n"\
+"NETMASK=$netmask\n"\
+"GATEWAY=$gateway\n"\
 "$dns" > $eth0
 service network restart
 
