@@ -52,7 +52,7 @@ until [ $val_gateway ]; do
                 val_gateway=true
         fi
 done
-echo -en "On net or Off [0=Off, 1=On}"
+echo -en "On net or Off [0=Off, 1=On]: "
 read onnet
 if [ "$onnet" = "1" ]; then
         dns="DNS1=172.16.121.19\nDNS2=172.16.121.41\nDNS3=172.16.0.57\nDNS4=172.16.1.40"
