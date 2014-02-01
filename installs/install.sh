@@ -14,7 +14,10 @@ if [ -f "$install" ]; then
         v_app[2]="$(cat $install | awk -F ', ' '{print $3}')"
         echo "$c_dir/${v_app[2]}"
         logger "test" "$c_dir/${v_app[2]}"
+        cat "$c_dir/${v_app[2]}"
         logger "'Installation selection found...  Installing ${v_app[0]}'" "$c_dir/${v_app[2]}"
+        cat "$c_dir/${v_app[2]}"
+        echo "cleaning rc.local"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f $install
         bash <(curl -sL ${v_app[1]}) 2>&1 | tee $c_dir/${v_app[2]}
