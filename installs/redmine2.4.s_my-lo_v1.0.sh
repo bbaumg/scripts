@@ -12,13 +12,18 @@ chkconfig mysqld on
 logger "Beginning install of RVM"
 bash <(curl -srL https://get.rvm.io)
 source /etc/profile.d/rvm.sh
+logger "Installing Ruby"
 rvm install 2.0
+logger "Installing freetds"
 yum install -y freetds freetds-devel
+logger "Installing Rails"
 gem install rails -v 3.2.13
+logger "Installing passenger"
 gem install passenger
 passenger-install-apache2-module --auto | tee /var/www/rails/passenger_install.out
 
 # Write the apache conf file & restart apache
+logger "Building the apache config file"
 grep -A 2 'LoadModule passenger_module' /var/www/rails/passenger_install.out\
           | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"\
           | sed 's/^ *//g'\
@@ -41,13 +46,16 @@ echo -e "\nNameVirtualHost *:80\n"\
 "   </Directory>\n"\
 "</VirtualHost>\n"\
 >> /etc/httpd/conf.d/redmine.conf
-cat /etc/httpd/conf.d/redmine.conf
+#cat /etc/httpd/conf.d/redmine.conf
+logger "Restarting httpd service"
 service httpd restart
 
 # Dlownload Redmine
+logger "Download Redmine from current stable"
 svn export http://svn.redmine.org/redmine/branches/2.4-stable /var/www/rails/redmine
 
 # Create the database connection file
+logger "Build database connection file"
 echo -e "# Config file written by installation script (bbaum)\n\n"\
 "production:\n"\
 "  adapter: mysql2\n"\
@@ -60,6 +68,7 @@ echo -e "# Config file written by installation script (bbaum)\n\n"\
 cat /var/www/rails/redmine/config/database.yml
 
 # Create the database in MYSQL
+logger "Create the database"
 echo -e "create database redmine character set utf8;\n"\
 "create user 'redmine'@'localhost' identified by 'password';\n"\
 "grant all privileges on redmine.* to 'redmine'@'localhost';\n"\
@@ -69,6 +78,7 @@ cat /var/www/rails/redmine/config/createdb.sql
 mysql < /var/www/rails/redmine/config/createdb.sql
 
 # Install redmine
+logger "Begin installing redmine"
 cd /var/www/rails/redmine/
 gem install bundler
 cd /var/www/rails/redmine/
