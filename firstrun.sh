@@ -7,9 +7,9 @@ if [ -f "$log" ]; then exit 1; fi
 source /etc/init.d/functions
 clear
 
+echo -en "Beginning base configuration...\n\n"
 # Setup initial admin and groups
 until [ $val_admin ]; do
-	echo -en "Beginning base configuration...\n\n"
 	echo -en "Enter the first admin's uername [ENTER]: "
 	read admin
 	#Create user groups
@@ -20,7 +20,7 @@ until [ $val_admin ]; do
 		val_admin=true
 		success
 	else
-		failed
+		failure
 	fi
 done
 
