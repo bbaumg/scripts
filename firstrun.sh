@@ -72,7 +72,7 @@ fi
 #echo -n "Enter the DNS [ENTER]: "
 
 # Install any apps?
-bash <(curl -srL 'https://raw.github.com/bbaumg/scripts/master/installs/install.sh') 'firstboot'
+bash <(curl -sL 'https://raw.github.com/bbaumg/scripts/master/installs/install.sh') 'firstboot'
 
 # Set the Hostname
 sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
