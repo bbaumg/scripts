@@ -12,16 +12,15 @@ if [ -f "$install" ]; then
         v_appname="$(cat $install | awk -F ', ' '{print $1}')"
         v_appurl="$(cat $install | awk -F ', ' '{print $2}')"
         v_log="$c_dir/$(cat $install | awk -F ', ' '{print $3}')"
-        #v_log="$c_dir/$_log"
-        echo "$v_log"
         echo > $v_log
-        logger "-------------------------------------------------\n"
+        echo -e "\n\n\n"
         logger "Installation selection found...  Installing $v_appname\n"
         logger "Cleaning files so it does not run next time\n"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f "$install"
         logger "Starting the Install...\n\n\n"
-        bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
+        #bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
+        bash <(curl -sL "$v_appurl") 2>&1 | tee -a logger
 else
         source <(curl -sL "$c_repo/installs/list.sh")
         if [ -z ${v_apps[0]} ]; then
