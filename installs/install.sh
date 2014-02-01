@@ -19,8 +19,8 @@ if [ -f "$install" ]; then
         logger "Cleaning rc.local entries so it does not run next time\n"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local)
         
-        rm -f $install
-        bash <(curl -sL ${v_app[1]}) 2>&1 | tee -a "$v_log"
+        rm -f "$install"
+        bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
 else
         source <(curl -sL "$c_repo/installs/list.sh")
         if [ -z ${v_apps[0]} ]; then
