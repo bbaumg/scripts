@@ -11,8 +11,8 @@ source <(curl -srL "$c_repo/minion/functions")
 if [ -f "$install" ]; then
         v_app[0]="$(cat $install | awk -F ', ' '{print $1}')"
         v_app[1]="$(cat $install | awk -F ', ' '{print $2}')"
-        v_app[2]="$(cat $install | awk -F ', ' '{print $3}')"
-        logger "'Installation selection found...  Installing ${v_app[0]}'" $c_dir/${v_app[2]}
+        v_app[2]="$(cat $install | awk -F ', ' '{print $3}')"c
+        logger "'Installation selection found...  Installing ${v_app[0]}'" "$c_dir/${v_app[2]}"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f $install
         bash <(curl -sL ${v_app[1]}) 2>&1 | tee $c_dir/${v_app[2]}
