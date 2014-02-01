@@ -20,8 +20,7 @@ until [ $val_admin ]; do
 		val_admin=true
 		echo -en "Admins group and default admin creation:" success
 	else
-		echo -en "Admins group and default admin creation:"
-		failure
+		echo -en "Admins group and default admin creation:" failure
 	fi
 done
 
