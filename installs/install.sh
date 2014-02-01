@@ -20,6 +20,7 @@ if [ -f "$install" ]; then
         rm -f "$install"
         logger "Starting the Install...\n\n\n"
         bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
+        logger "Installation has completed"
 else
         source <(curl -sL "$c_repo/installs/list.sh")
         if [ -z ${v_apps[0]} ]; then
