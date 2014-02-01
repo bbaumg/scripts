@@ -1,12 +1,16 @@
 #!/bin/bash
+logger "Performing YUM installation"
 yum install -y wget vim lynx openssh-clients ntsysv ntp traceroute mysql-devel httpd httpd-devel curl curl-devel subversion
+logger "Creating rails folder"
 mkdir -p /var/www/rails
+logger "Setting service run levels and starting services"
 service iptables stop
 service mysqld start
 chkconfig httpd on
 chkconfig iptables off
 chkconfig mysqld on
-curl -L https://get.rvm.io | bash
+logger "Beginning install of RVM"
+bash <(curl -srL https://get.rvm.io)
 source /etc/profile.d/rvm.sh
 rvm install 2.0
 yum install -y freetds freetds-devel
