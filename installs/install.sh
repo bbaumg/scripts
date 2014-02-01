@@ -6,7 +6,7 @@ install="$c_dir/install.run"
 c_repo="https://raw.github.com/bbaumg/scripts/master"
 #if [ -f "$log" ]; then exit 1; fi
 
-curl -srL "$c_repo/minion/functions.sh" > "$c_dir/functions.sh"
+curl -sL "$c_repo/minion/functions.sh" > "$c_dir/functions.sh"
 source "$c_dir/functions.sh"
 
 if [ -f "$install" ]; then
