@@ -18,6 +18,7 @@ if [ -f "$install" ]; then
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f "$install"
         logger "Starting the Install...\n\n\n"
+        sleep 5
         bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
         logger "Installation has completed"
 else
