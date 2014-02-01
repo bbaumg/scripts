@@ -67,11 +67,9 @@ read onnet
 if [ "$onnet" = "1" ]; then
         dns="DNS1=172.16.121.19\nDNS2=172.16.121.41\nDNS3=172.16.0.57\nDNS4=172.16.1.40"
 else
-        dns="DNS=8.8.8.8"    
+        dns="DNS1=8.8.8.8"    
 fi
 #echo -n "Enter the DNS [ENTER]: "
-#read dns
-dns="8.8.8.8"
 
 # Install any apps?
 bash <(curl -srL 'https://raw.github.com/bbaumg/scripts/master/installs/install.sh') 'firstboot'
