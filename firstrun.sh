@@ -8,13 +8,22 @@ source /etc/init.d/functions
 clear
 
 # Setup initial admin and groups
-echo -en "Beginning base configuration...\n\n"
-echo -en "Enter the first admin's uername [ENTER]: "
-read admin
-#Create user groups
-echo "Adding admins" | tee -a $log
-groupadd admins
-useradd --groups admins $admin
+until [ $val_admin ]; do
+	echo -en "Beginning base configuration...\n\n"
+	echo -en "Enter the first admin's uername [ENTER]: "
+	read admin
+	#Create user groups
+	echo "Adding admins" | tee -a $log
+	groupadd admins
+	useradd --groups admins $admin
+	if [ "$(grep "$admin" /etc/passwd | wc -l)" == 1 ]; then
+		val_admin=true
+		success
+	else
+		failed
+	fi
+done
+
 #echo -en "\nEnter the first admin’s password:"
 echo
 passwd $admin
