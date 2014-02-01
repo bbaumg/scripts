@@ -9,12 +9,13 @@ c_repo="https://raw.github.com/bbaumg/scripts/master"
 source <(curl -srL "$c_repo/minion/functions.sh")
 
 if [ -f "$install" ]; then
-        v_app[0]="$(cat $install | awk -F ', ' '{print $1}')"
-        v_app[1]="$(cat $install | awk -F ', ' '{print $2}')"
-        v_app[2]="$(cat $install | awk -F ', ' '{print $3}')"
-        #logger "-------------------------------------------------"  "$c_dir/${v_app[2]}"
-        #logger "Installation selection found...  Installing ${v_app[0]}" "$c_dir/${v_app[2]}"
-        echo -e "Installation selection found...  Installing ${v_app[0]}" >> "$c_dir/${v_app[2]}"
+        v_appname="$(cat $install | awk -F ', ' '{print $1}')"
+        v_appurl="$(cat $install | awk -F ', ' '{print $2}')"
+        v_log="$(cat $install | awk -F ', ' '{print $3}')"
+        echo > $v_log
+        logger "-------------------------------------------------"  "$c_dir/$v_log"
+        logger "Installation selection found...  Installing ${v_app[0]}" "$c_dir/$v_log"
+        #echo -e "Installation selection found...  Installing ${v_app[0]}" >> "$c_dir/$v_log"
         echo; echo; echo
         cat "$c_dir/${v_app[2]}"
         echo
