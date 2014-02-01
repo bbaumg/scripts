@@ -16,7 +16,7 @@ until [ $val_admin ]; do
 	echo "Adding admins" | tee -a $log
 	groupadd admins
 	useradd --groups admins $admin
-	if [ "$(grep "$admin" /etc/passwd | wc -l)" == 1 ]; then
+	if [ "$(grep $admin /etc/passwd | wc -l)" == 1 ]; then
 		val_admin=true
 		success
 	else
