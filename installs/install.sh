@@ -13,6 +13,7 @@ if [ -f "$install" ]; then
         v_appurl="$(cat $install | awk -F ', ' '{print $2}')"
         v_log="$(cat $install | awk -F ', ' '{print $3}')"
         v_log="$c_dir/$_log"
+        echo "$v_log"
         echo > $v_log
         logger "-------------------------------------------------\n"
         logger "Installation selection found...  Installing $v_appname"
