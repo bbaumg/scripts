@@ -14,11 +14,10 @@ if [ -f "$install" ]; then
         v_log="$(cat $install | awk -F ', ' '{print $3}')"
         v_log="$c_dir/$_log"
         echo > $v_log
-        logger "-------------------------------------------------"
-        logger "Installation selection found...  Installing ${v_app[0]}"
-        echo; echo; echo
-        logger "Cleaning rc.local entries so it does not run next time"
-        [ sed -i --follow-symlinks '/install.sh/d' /etc/rc.local ]; echo $?
+        logger "-------------------------------------------------\n"
+        logger "Installation selection found...  Installing $v_appname"
+        logger "Cleaning rc.local entries so it does not run next time\n"
+        [ $(sed -i --follow-symlinks '/install.sh/d' /etc/rc.local) ]; echo $?
         
         rm -f $install
         bash <(curl -sL ${v_app[1]}) 2>&1 | tee -a "$v_log"
