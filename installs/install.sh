@@ -14,7 +14,7 @@ if [ -f "$install" ]; then
         v_appurl="$(cat $install | awk -F ', ' '{print $2}')"
         v_log="$c_dir/$(cat $install | awk -F ', ' '{print $3}')"
         echo > $v_log
-        logger "Installation selection found...  Installing $v_appname"
+        logger "Install selection found...  Installing $v_appname"
         logger "Cleaning files so it does not run next time"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f "$install"
