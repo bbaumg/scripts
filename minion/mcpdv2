@@ -1,0 +1,110 @@
+#!/bin/bash
+#
+# /etc/init.d/mcpd
+#
+# chkconfig: 3 95 05
+# Description:  mcpd is the Minion Control Program used to mange all executed
+# minion jobs.
+#
+# processname:  MCP (Minion Control Program)
+# config:  /var/scripts/minion/mcp.conf
+# pidfile: /var/run/minion/mcpd.pid
+
+### BEGIN INIT INFO
+# Provides: mcpd
+# Required-Start: $network $local_fs $remote_fs
+# Required-Stop: $network $local_fs $remote_fs
+# Should-Start:
+# Should-Stop:
+# Short-Description: start and stop mcpd
+# Description: mcpd is the Minion Control Program used to mange all
+#              executed minion jobs.
+### END INIT INFO
+
+
+#Look at this!
+#http://www.cyberciti.biz/tips/linux-write-sys-v-init-script-to-start-stop-service.html
+
+
+# Source function library.
+#. /etc/init.d/functions
+
+# Setup for the program
+v_name="mcpd"
+v_progdir="/var/scripts/minion"
+v_prog="mcp.sh"
+v_logdir="/var/log/minion"
+
+RETVAL=0
+#pids=`ps -ef | grep $v_prog | grep -v grep | awk '{print $2}'`
+pids=`ps -ef | grep mcp.sh | grep -v grep | awk '{print $2}' | tr  "\\n" " "`
+
+start() {
+	if [ -n "$pids" ]; then
+		echo "$v_name is already running (pid $pids)"
+		return 1	
+	else
+		echo -n "Starting $v_name: "
+		bash $v_progdir/$v_prog &
+		pids=`ps -ef | grep mcp.sh | grep -v grep | awk '{print $2}' | tr  "\\n" " "`
+		sleep 1
+		if [ -n "$pids" ]; then
+			echo -n "pid `ps -ef | grep $v_prog | grep -v grep | awk '{print $2}'`"
+			echo -e "$t_ok"
+		else
+			echo 0e "$t_failed"
+		fi
+	fi
+}
+
+
+stop() {
+	if [ -z "$pids" ]; then
+		echo "$v_name is not running"
+		return 0
+	fi
+	echo -n "Stopping $v_name: "
+	kill -9 $pids && pids=''
+	pids=`ps -ef | grep mcp.sh | grep -v grep | awk '{print $2}' | tr  "\\n" " "`
+	if [ -z "$pids" ]; then
+		echo -e "$t_ok"
+	else
+		echo -e "$t_failed"
+	fi
+}
+status () {
+	if [ -z $(running_pid) ]; then
+		echo "no Pids"
+	fi
+}
+
+
+# Script Constants
+t_reset='\033[0m'
+t_red='\033[31m\033[40m'
+t_green='\033[32m\033[40m'
+t_col='\\033[60G'
+t_failed="$t_col$t_reset[$t_red FAILED$t_reset ]"
+t_ok="$t_col$t_reset[  $t_green OK $t_reset  ]"
+
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart)
+                stop
+		sleep 1
+                start
+                ;;
+        status)
+				status
+				;;
+        *)      (10)
+                echo $"Usage: $0 {start|stop|restart|status}"
+                RETVAL=1
+esac
+
+

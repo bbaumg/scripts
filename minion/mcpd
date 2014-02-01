@@ -1,0 +1,112 @@
+#!/bin/bash
+#
+# /etc/init.d/mcpd
+#
+# chkconfig: 3 95 05
+# Description:  mcpd is the Minion Control Program used to mange all executed
+# minion jobs.
+#
+# processname:  MCP (Minion Control Program)
+# config:  /var/scripts/minion/mcp.conf
+# pidfile: /var/run/minion/mcpd.pid
+
+### BEGIN INIT INFO
+# Provides: mcpd
+# Required-Start: $network $local_fs $remote_fs
+# Required-Stop: $network $local_fs $remote_fs
+# Should-Start:
+# Should-Stop:
+# Short-Description: start and stop mcpd
+# Description: mcpd is the Minion Control Program used to mange all
+#              executed minion jobs.
+### END INIT INFO
+
+# Setup for the program
+v_name="mcpd"
+v_progdir="/var/scripts/minion"
+v_prog="mcp.sh"
+v_logdir="/var/log/minion"
+
+find_pids() {
+	pids=''
+	pids=`ps -ef | grep $v_prog | grep -v grep | awk '{print $2}' | tr  "\\n" " "`
+}
+
+start() {
+	find_pids
+	if [ -n "$pids" ]; then
+		echo -n "$v_name is already running (pid $pids)"
+		echo -e "$t_error"
+	else
+		echo -n "Starting $v_name: "
+		bash $v_progdir/$v_prog &
+		find_pids
+		if [ -n "$pids" ]; then
+			echo -e "$t_ok"
+		else
+			sleep 1
+			find_pids
+			if [ -n "$pids" ]; then
+				echo -e "$t_ok"
+			else
+				echo -e "$t_failed"
+			fi
+		fi
+	fi
+}
+
+stop() {
+	find_pids
+	if [ -z "$pids" ]; then
+		echo -n "$v_name is not running"
+		echo -e "$t_error"
+	else
+	        echo -n "Stopping $v_name: (pids $pids)"
+	        kill -9 $pids
+		pids=''
+		sleep 1
+		find_pids
+	        if [ -z "$pids" ]; then
+	                echo -e "$t_ok"
+	        else
+	                echo -e "$t_failed"
+	        fi
+	fi
+}
+status () {
+	find_pids
+	if [ -n "$pids" ]; then
+		echo "$v_name is running (pids $pids)"
+	else
+		echo "$v_name is NOT running"
+	fi
+}
+
+
+# Script Constants
+t_reset='\033[0m'
+t_red='\033[31m\033[40m'
+t_green='\033[32m\033[40m'
+t_col='\033[60G'
+t_failed="$t_col$t_reset[$t_red FAILED$t_reset ]"
+t_ok="$t_col$t_reset[  $t_green OK $t_reset  ]"
+t_error="$t_col$t_reset[$t_red ERROR$t_reset ]"
+
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart)
+                stop
+		sleep 1
+                start
+                ;;
+        status)
+				status
+				;;
+        *)      (10)
+                echo $"Usage: $0 {start|stop|restart|status}"
+esac
