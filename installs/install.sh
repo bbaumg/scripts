@@ -17,7 +17,7 @@ if [ -f "$install" ]; then
         logger "-------------------------------------------------\n"
         logger "Installation selection found...  Installing $v_appname"
         logger "Cleaning rc.local entries so it does not run next time\n"
-        [ $(sed -i --follow-symlinks '/install.sh/d' /etc/rc.local) ]; echo $?
+        sed -i --follow-symlinks '/install.sh/d' /etc/rc.local)
         
         rm -f $install
         bash <(curl -sL ${v_app[1]}) 2>&1 | tee -a "$v_log"
