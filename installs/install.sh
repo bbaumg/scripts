@@ -16,11 +16,11 @@ if [ -f "$install" ]; then
         echo "$v_log"
         echo > $v_log
         logger "-------------------------------------------------\n"
-        logger "Installation selection found...  Installing $v_appname"
-        logger "Cleaning rc.local entries so it does not run next time\n"
+        logger "Installation selection found...  Installing $v_appname\n"
+        logger "Cleaning files so it does not run next time\n"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
-        
         rm -f "$install"
+        logger "Starting the Install...\n\n\n"
         bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
 else
         source <(curl -sL "$c_repo/installs/list.sh")
