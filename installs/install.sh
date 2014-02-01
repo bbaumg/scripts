@@ -12,7 +12,7 @@ if [ -f "$install" ]; then
         v_app[0]="$(cat $install | awk -F ', ' '{print $1}')"
         v_app[1]="$(cat $install | awk -F ', ' '{print $2}')"
         v_app[2]="$(cat $install | awk -F ', ' '{print $3}')"
-        logger "------------------------------------------------------------------------------"
+        logger "-------------------------------------------------"
         logger "Installation selection found...  Installing ${v_app[0]}" "$c_dir/${v_app[2]}"
         echo; echo; echo
         cat "$c_dir/${v_app[2]}"
@@ -20,7 +20,7 @@ if [ -f "$install" ]; then
         echo "cleaning rc.local"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f $install
-        bash <(curl -sL ${v_app[1]}) 2>&1 | tee $c_dir/${v_app[2]}
+        bash <(curl -sL ${v_app[1]}) 2>&1 | tee -a $c_dir/${v_app[2]}
 else
         source <(curl -sL "$c_repo/installs/list.sh")
         if [ -z ${v_apps[0]} ]; then
