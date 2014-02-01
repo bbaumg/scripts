@@ -20,6 +20,7 @@ until [ $val_admin ]; do
 		val_admin=true
 		success
 	else
+		echo "$admin"
 		failure
 	fi
 done
