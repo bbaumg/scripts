@@ -11,8 +11,8 @@ source <(curl -srL "$c_repo/minion/functions.sh")
 if [ -f "$install" ]; then
         v_appname="$(cat $install | awk -F ', ' '{print $1}')"
         v_appurl="$(cat $install | awk -F ', ' '{print $2}')"
-        v_log="$(cat $install | awk -F ', ' '{print $3}')"
-        v_log="$c_dir/$_log"
+        v_log="$c_dir/$(cat $install | awk -F ', ' '{print $3}')"
+        #v_log="$c_dir/$_log"
         echo "$v_log"
         echo > $v_log
         logger "-------------------------------------------------\n"
