@@ -18,10 +18,9 @@ until [ $val_admin ]; do
 	useradd --groups admins $admin
 	if [ "$(grep $admin /etc/passwd | wc -l)" == 1 ]; then
 		val_admin=true
-		success
+		echo -en "Admins group and default admin creation:" success
 	else
-		echo "$admin"
-		failure
+		echo -en "Admins group and default admin creation:" failure
 	fi
 done
 
