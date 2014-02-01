@@ -1,4 +1,12 @@
 #!/bin/bash
+
+# Variables & Constants
+v_scripts='/var/scripts'
+
+# Modules
+source "$v_scripts/installs/functions.sh"
+
+
 logger "Performing YUM installation"
 yum install -y wget vim lynx openssh-clients ntsysv ntp traceroute mysql-devel httpd httpd-devel curl curl-devel subversion
 logger "Creating rails folder"
