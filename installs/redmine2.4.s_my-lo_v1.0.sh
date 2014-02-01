@@ -18,7 +18,7 @@ chkconfig httpd on
 chkconfig iptables off
 chkconfig mysqld on
 logger "Beginning install of RVM"
-bash <(curl -srL https://get.rvm.io)
+bash <(curl -sL https://get.rvm.io)
 source /etc/profile.d/rvm.sh
 logger "Installing Ruby"
 rvm install 2.0
