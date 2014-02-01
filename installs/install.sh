@@ -19,8 +19,7 @@ if [ -f "$install" ]; then
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
         rm -f "$install"
         logger "Starting the Install...\n\n\n"
-        #bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
-        bash <(curl -sL "$v_appurl") 2>&1 | tee -a logger
+        bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
 else
         source <(curl -sL "$c_repo/installs/list.sh")
         if [ -z ${v_apps[0]} ]; then
@@ -49,13 +48,8 @@ else
                 echo "curl -sL $c_repo/installs/install.sh > $c_dir/install.sh" >> $rc
                 echo "chmod 755 $c_dir/install.sh" >> $rc
                 echo "bash $c_dir/install.sh" >> $rc
-#                echo "bash <(curl -sL $c_repo/install.sh)" >> /etc/rc.local
-#                echo "Installation will begin when system resumes from the next reboot"
-                if [ "$1" != 'firstboot' ]; then 
-                        echo -n "System is rebooting now...  "
-                        sleep 3
-                        reboot
-                fi
+                echo "Installation will begin when system resumes from the next reboot"
+                if [ "$1" != 'firstboot' ]; then echo -n "System is rebooting now...  "; sleep 3; reboot; fi
         else
                 echo -e "\n\n\n\n\n***********************************************************************"
                 echo -e "There was an Error finding the appliation you selected"
