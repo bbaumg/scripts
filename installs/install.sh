@@ -17,7 +17,7 @@ if [ -f "$install" ]; then
         logger "Installation selection found...  Installing ${v_app[0]}" "$c_dir/$v_log"
         #echo -e "Installation selection found...  Installing ${v_app[0]}" >> "$c_dir/$v_log"
         echo; echo; echo
-        cat "$c_dir/${v_app[2]}"
+        cat "$c_dir/$v_log"
         echo
         echo "cleaning rc.local"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
