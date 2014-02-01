@@ -6,7 +6,8 @@ install="$c_dir/install.run"
 c_repo="https://raw.github.com/bbaumg/scripts/master"
 #if [ -f "$log" ]; then exit 1; fi
 
-source <(curl -srL "$c_repo/minion/functions.sh")
+curl -srL "$c_repo/minion/functions.sh" > "$c_dir/functions.sh"
+source "$c_dir/functions.sh"
 
 if [ -f "$install" ]; then
         v_appname="$(cat $install | awk -F ', ' '{print $1}')"
