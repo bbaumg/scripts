@@ -2,22 +2,20 @@
 
 #log="/var/log/installs.log"
 c_dir='/var/scripts/installs'
-install="$c_dir/install.run"
 c_repo="https://raw.github.com/bbaumg/scripts/master"
+v_install="$c_dir/install.run"
 #if [ -f "$log" ]; then exit 1; fi
 
-curl -sL "$c_repo/minion/functions.sh" > "$c_dir/functions.sh"
-source "$c_dir/functions.sh"
-
-if [ -f "$install" ]; then
-        v_appname="$(cat $install | awk -F ', ' '{print $1}')"
-        v_appurl="$(cat $install | awk -F ', ' '{print $2}')"
-        v_log="$c_dir/$(cat $install | awk -F ', ' '{print $3}')"
+if [ -f "$v_install" ]; then
+        source /var/scripts/minion/functions.sh
+        v_appname="$(cat $v_install | awk -F ', ' '{print $1}')"
+        v_appurl="$(cat $v_install | awk -F ', ' '{print $2}')"
+        v_log="$c_dir/$(cat $v_install | awk -F ', ' '{print $3}')"
         echo > $v_log
         logger "Install selection found...  Installing $v_appname"
         logger "Cleaning files so it does not run next time"
         sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
-        rm -f "$install"
+        rm -f "$v_install"
         logger "Starting the Install...\n\n\n"
         sleep 5
         bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
