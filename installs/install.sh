@@ -7,7 +7,7 @@ v_install="$c_dir/install.run"
 #if [ -f "$log" ]; then exit 1; fi
 
 if [ -f "$v_install" ]; then
-        source /var/scripts/minion/functions.sh
+        source /var/scripts/functions.sh
         v_appname="$(cat $v_install | awk -F ', ' '{print $1}')"
         v_appurl="$(cat $v_install | awk -F ', ' '{print $2}')"
         v_log="$c_dir/$(cat $v_install | awk -F ', ' '{print $3}')"
