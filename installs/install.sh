@@ -43,7 +43,7 @@ else
              [ -n "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $3}')" ]; then
                 echo "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}') will install after the next reboot"
                 mkdir -p $c_dir
-                echo "${v_apps[$v_app]}" > $install
+                echo "${v_apps[$v_app]}" > $v_install
                 rc='/etc/rc.local'
                 echo "curl -sL $c_repo/installs/install.sh > $c_dir/install.sh" >> $rc
                 echo "chmod 755 $c_dir/install.sh" >> $rc
