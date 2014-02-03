@@ -4,7 +4,7 @@
 v_scripts='/var/scripts'
 
 # Modules
-source "$v_scripts/installs/functions.sh"
+source "$v_scripts/functions.sh"
 
 
 logger "Performing YUM installation"
