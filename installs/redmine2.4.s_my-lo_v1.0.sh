@@ -20,6 +20,8 @@ chkconfig mysqld on
 logger "Beginning install of RVM"
 bash <(curl -sL https://get.rvm.io)
 source /etc/profile.d/rvm.sh
+bash <(curl -sL https://get.rvm.io)
+source /etc/profile.d/rvm.sh
 logger "Installing Ruby"
 rvm install 2.0
 logger "Installing freetds"
