@@ -47,13 +47,13 @@ until [ "$val_allgood" == "YES" ]; do
 	        if [[ ! $ipaddr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	                echo "That is not a valid address...  Please enter it again."
 	        else
-	       		echo -en "Determining if ip address $ipaddr is already in use for ..."
+	       		echo -en "Determining if $ipaddr is already in use:"
 			if ! /sbin/arping -q -c 2 -w 3 -D $ipaddr ; then
 				failure
-				echo -e "Error, some other host already uses address $ipaddr."
+				echo -e "\nError, some other host already uses address $ipaddr.\n"
 				val_ipaddr=0
 			else
-				success
+				success; echo
 				val_ipaddr=1
 			fi
 	        fi
