@@ -110,6 +110,7 @@ sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
 #ifup eth0  #This should no longer be needed.
 
 #Set grub to show messages during boot
+echo "Set machine to show messages during boot process" | tee -a $log
 sed -i --follow-symlinks 's/rhgb\ //g' /etc/grub.conf
 
 #Disable SELINUX
@@ -117,13 +118,15 @@ echo "Disabling SELINUX" | tee -a $log
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 #Secure SSH
+echo "Locking down SSH" | tee -a $log
 sshconf="/etc/ssh/sshd_config"
 sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
 sed -i --follow-symlinks 's/#Banner\ none/Banner\ \/etc\/issue/g' $sshconf
 sed -i --follow-symlinks 's/GSSAPIAuthentication\ yes/GSSAPIAuthentication\ no/g' $sshconf
-service sshd restart
+service sshd restart | tee -a $log
 
 #Configure IP Tables
+echo "Configuring iptables" | tee -a $log
 ipt="/etc/sysconfig/iptables"
 echo "*filter" > $ipt
 echo ":INPUT DROP [0:0]" >> $ipt
@@ -140,13 +143,15 @@ echo "-A INPUT -p udp --dport 161 -j ACCEPT" >> $ipt
 echo "-A INPUT -p udp --dport 123 -j ACCEPT" >> $ipt
 echo "" >> $ipt
 echo "COMMIT" >> $ipt
-service iptables restart
+service iptables restart | tee -a $log
 
 #Configure Sudoers
 echo "Configuring sudoers" | tee -a $log
 echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 # Setup MOTD to run at login
+echo "Settup MOTD" | tee -a $log
+sed -i --folow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
 #Update, upgrade, and install apps
