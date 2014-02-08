@@ -50,8 +50,9 @@ echo -e "\nNameVirtualHost *:80\n"\
 "      Allow from all\n"\
 "   </Directory>\n"\
 "</VirtualHost>\n"\
->> /etc/httpd/conf.d/$v_site.conf
-cat /etc/httpd/conf.d/$v_site.conf
+>> /etc/httpd/conf/httpd.conf
+#/etc/httpd/conf.d/$v_site.conf
+#cat /etc/httpd/conf.d/$v_site.conf
 service httpd restart
 
 
