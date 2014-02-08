@@ -71,8 +71,9 @@ until [ "$val_allgood" == "YES" ]; do
 	until [ "$val_gateway" == 1 ]; do
 	        #echo -n "Enter the gateway [ENTER]: "
 	        if [ "$gateway" == '' ]; then 
-	        	iparray=(`echo $ipaddr | tr "." " "`)
-	        	gateway="${iparray[0]}.${iparray[1}.${iparray[2]}."
+iparray=(`echo $ipaddr | tr "." " "`)
+gateway="${iparray[0]}.${iparray[1]}.${iparray[2]}."
+echo "$gateway"
 	        fi
 	        read -e -p "Enter the gateway [ENTER]: " -i "$gateway" gateway
 	        if [[ ! $gateway =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
