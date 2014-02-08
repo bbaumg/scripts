@@ -6,6 +6,7 @@ v_db='wordpress'
 v_db_user='wordpress'
 v_db_pw='password'
 v_site='wordpress'
+v_site_root='/var/www/html'
 v_site_ver='http://develop.svn.wordpress.org/tags/3.8.1/'
 
 # Modules
@@ -33,7 +34,7 @@ cat $v_scripts/createdb.sql
 mysql < $v_scripts/createdb.sql
 
 logger "Download Wordpress"
-svn export $v_site_ver /var/www/$v_site
+svn export $v_site_ver $v_site_root/$v_site
 
 logger "Configure the wordpress instance"
 
