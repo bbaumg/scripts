@@ -31,9 +31,9 @@ echo
 passwd $admin
 
 until [ $val_allgood == "YES" ]; do
-	val_ipaddr=false
-	val_netmask=false
-	val_gateway=false
+	val_ipaddr=''
+	val_netmask=''
+	val_gateway=''
 	# Collecting system information
 	echo -en "\nEnter the hostname [ENTER]: "
 	read v_hostname
