@@ -151,7 +151,7 @@ echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 # Setup MOTD to run at login
 echo "Settup MOTD" | tee -a $log
-sed -i --folow-symlinks '/motd.sh/d' /etc/bashrc
+sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
 #Update, upgrade, and install apps
