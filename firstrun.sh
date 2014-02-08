@@ -30,9 +30,10 @@ until [ "$val_admin" == 1 ]; do
 	echo
 done
 
-#echo -en "\nEnter the first admin’s password:"
-echo
-passwd $admin
+if [ "$1" == "test" ]; then 
+	echo
+	passwd $admin
+fi
 
 until [ "$val_allgood" == "YES" ]; do
 	val_ipaddr='0'
