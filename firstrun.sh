@@ -2,6 +2,8 @@
 #Variables
 log="/var/log/firstboot.log"
 admins='admins'
+v_appinstall_url='https://raw.github.com/bbaumg/scripts/master/installs/install.sh'
+v_defaultapps='logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git'
 
 # Verify it has not run before
 if [ -f "$log" ]; then exit 1; fi
@@ -87,7 +89,7 @@ until [ "$val_allgood" == "YES" ]; do
 done
 
 # Install any apps?
-bash <(curl -sL 'https://raw.github.com/bbaumg/scripts/master/installs/install.sh') 'firstboot'
+bash <(curl -sL "$v_appinstall_url" ) 'firstboot'
 
 # Set the Hostname
 sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
@@ -161,8 +163,8 @@ yum update -y | tee -a $log
 echo "YUM upgrade" | tee -a $log
 yum upgrade -y | tee -a $log
 echo "Install apps" | tee -a $log
-yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git | tee -a $log
-echo "cleanup installs" | tee -a $log
+yum install -y "$v_defaultapps" | tee -a $log
+echo "Cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
 # Install custom apps
@@ -204,4 +206,4 @@ service network restart
 #awk '!/firstboot/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
 sed -i --follow-symlinks '/firstboot/d' /etc/rc.local
 sed -i --follow-symlinks '/firstrun/d' /etc/rc.local
-shutdown -r now
+reboot
