@@ -47,7 +47,14 @@ until [ "$val_allgood" == "YES" ]; do
 	        if [[ ! $ipaddr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	                echo "That is not a valid address...  Please enter it again."
 	        else
-	                val_ipaddr=1
+	       		echo -en "Determining if ip address $ipaddr is already in use for ..."
+			if ! /sbin/arping -q -c 2 -w 3 -D -I $ipaddr ; then
+				echo -e "Error, some other host already uses address $ipaddr."
+				val_ipaddr=0
+			else
+				success
+				val_ipaddr=1
+			fi
 	        fi
 	done
 	until [ "$val_netmask" == 1 ]; do
@@ -77,6 +84,7 @@ until [ "$val_allgood" == "YES" ]; do
 	else
 	        dns="DNS1=8.8.8.8\nDNS2=8.8.4.4"    
 	fi
+	
 	#echo -n "Enter the DNS [ENTER]: "
 	echo -en "\n\nPlease check the settings are right?\n\n"\
 "Hostname=$v_hostname\n"\
