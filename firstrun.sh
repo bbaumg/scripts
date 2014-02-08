@@ -12,7 +12,8 @@ clear
 
 echo -en "Beginning base configuration...\n\n"
 # Setup initial admin and groups
-until [ $val_admin ]; do
+if [ "$1" == "test" ]; then $val_admin=1; fi
+until [ "$val_admin" == 1 ]; do
 	read -e -p "Enter the first admin's uername [ENTER]: " admin
 	#Create user groups
 	echo -e "\nAdding admins" | tee -a $log
@@ -21,7 +22,7 @@ until [ $val_admin ]; do
 	useradd --groups "$admins" $admin
 	checkadmin=`grep $admin /etc/passwd | wc -l`
 	if [ "$checkadmin" == 1 ]; then
-		val_admin=true
+		val_admin=1
 		echo -en "Admins group and default admin creation:"; success
 	else
 		echo -en "Admins group and default admin creation:"; failure
