@@ -7,14 +7,15 @@ v_db_user='wordpress'
 v_db_pw='password'
 v_site='wordpress'
 v_site_root='/var/www/html'
-v_site_ver='http://develop.svn.wordpress.org/tags/3.8.1/'
+#v_site_ver='http://develop.svn.wordpress.org/tags/3.8.1/'
+v_site_ver='http://wordpress.org/latest.zip'
 
 # Modules
 source "$v_scripts/functions.sh"
 
 
 logger "Performing YUM installation"
-yum install -y wget vim lynx mysql mysql-server php php-mysql httpd subversion
+yum install -y wget vim lynx mysql mysql-server php php-mysql httpd subversion unzip
 
 logger "Set defaults and start services"
 chkconfig mysqld on
@@ -34,7 +35,9 @@ cat $v_scripts/createdb.sql
 mysql < $v_scripts/createdb.sql
 
 logger "Download Wordpress"
-svn export $v_site_ver $v_site_root/$v_site
+#svn export $v_site_ver $v_site_root/$v_site
+cd $v_site_root
+wget $v_site_ver -o temp.zip && unzip temp.zip && rm -f temp.zip
 
 logger "Configure the wordpress instance"
 
