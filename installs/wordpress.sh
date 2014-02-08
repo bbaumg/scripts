@@ -24,4 +24,5 @@ echo -e "create database $v_db character set utf8;\n"\
 cat $v_scripts/createdb.sql
 mysql < $v_scripts/createdb.sql
 
+logger "Download Wordpress"
 svn export $v_site_ver /var/www/$v_site
