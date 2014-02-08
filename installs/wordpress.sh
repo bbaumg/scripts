@@ -32,3 +32,15 @@ mysql < $v_scripts/createdb.sql
 
 logger "Download Wordpress"
 svn export $v_site_ver /var/www/$v_site
+
+logger "Coonfigure the wordpress instance"
+
+logger "Restart httpd"
+service httpd restart
+
+
+
+
+
+
+
