@@ -50,6 +50,7 @@ echo -e "\nNameVirtualHost *:80\n"\
 "   </Directory>\n"\
 "</VirtualHost>\n"\
 >> /etc/httpd/conf.d/$v_site.conf
+cat /etc/httpd/conf.d/$v_site.conf
 service httpd restart
 
 
