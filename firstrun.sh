@@ -23,53 +23,63 @@ until [ $val_admin ]; do
 	else
 		echo -en "Admins group and default admin creation:"; failure
 	fi
+	echo
 done
 
 #echo -en "\nEnter the first admin’s password:"
 echo
 passwd $admin
 
-# Collecting system information
-echo -en "\nEnter the hostname [ENTER]: "
-read v_hostname
-v_hostname=${v_hostname^^}
-#hostname $v_hostname
-until [ $val_ipaddr ]; do
-        echo -n "Enter the IP address [ENTER]: "
-        read ipaddr
-        if [[ ! $ipaddr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-                echo "That is not a valid address...  Please enter it again."
-        else
-                val_ipaddr=true
-        fi
+until [ $val_allgood == "YES" ]; do
+	val_ipaddr=false
+	val_netmask=false
+	val_gateway=false
+	# Collecting system information
+	echo -en "\nEnter the hostname [ENTER]: "
+	read v_hostname
+	v_hostname=${v_hostname^^}
+	#hostname $v_hostname
+	until [ $val_ipaddr ]; do
+	        echo -n "Enter the IP address [ENTER]: "
+	        read ipaddr
+	        if [[ ! $ipaddr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+	                echo "That is not a valid address...  Please enter it again."
+	        else
+	                val_ipaddr=true
+	        fi
+	done
+	until [ $val_netmask ]; do
+	        #echo -n "Enter the netmask [ENTER]: "
+	        #read netmask
+	        netmask='255.255.255.0'
+	        if [[ ! $netmask =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+	                echo "That is not a valid address...  Please enter it again."
+	        else
+	                val_netmask=true
+	        fi
+	done       
+	until [ $val_gateway ]; do
+	        echo -n "Enter the gateway [ENTER]: "
+	        read gateway
+	        if [[ ! $gateway =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+	                echo "That is not a valid address...  Please enter it again."
+	        else
+	                val_gateway=true
+	        fi
+	done
+	echo -en "On net or Off [0=Off, 1=On]: "
+	read onnet
+	if [ "$onnet" = "1" ]; then
+	        dns="DNS1=172.16.121.19\nDNS2=172.16.121.41\nDNS3=172.16.0.57\nDNS4=172.16.1.40"
+	else
+	        dns="DNS1=8.8.8.8\nDNS2=8.8.4.4"    
+	fi
+	#echo -n "Enter the DNS [ENTER]: "
+	echo -en "Is all of this information correct?\n\n"\
+	"Hostname:  $v_hostname"\
+	"IPADDR: $ipaddr\nNETMASK: $netmask\nGATEWAY: $gateway\n$dns"\
+	read -i "yes" -e -p "Yes or No: " val_allgood && val_allgood=${val_allgood^^}
 done
-until [ $val_netmask ]; do
-        #echo -n "Enter the netmask [ENTER]: "
-        #read netmask
-        netmask='255.255.255.0'
-        if [[ ! $netmask =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-                echo "That is not a valid address...  Please enter it again."
-        else
-                val_netmask=true
-        fi
-done       
-until [ $val_gateway ]; do
-        echo -n "Enter the gateway [ENTER]: "
-        read gateway
-        if [[ ! $gateway =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-                echo "That is not a valid address...  Please enter it again."
-        else
-                val_gateway=true
-        fi
-done
-echo -en "On net or Off [0=Off, 1=On]: "
-read onnet
-if [ "$onnet" = "1" ]; then
-        dns="DNS1=172.16.121.19\nDNS2=172.16.121.41\nDNS3=172.16.0.57\nDNS4=172.16.1.40"
-else
-        dns="DNS1=8.8.8.8\nDNS2=8.8.4.4"    
-fi
-#echo -n "Enter the DNS [ENTER]: "
 
 # Install any apps?
 bash <(curl -sL 'https://raw.github.com/bbaumg/scripts/master/installs/install.sh') 'firstboot'
