@@ -49,6 +49,7 @@ until [ "$val_allgood" == "YES" ]; do
 	        else
 	       		echo -en "Determining if ip address $ipaddr is already in use for ..."
 			if ! /sbin/arping -q -c 2 -w 3 -D $ipaddr ; then
+				failure
 				echo -e "Error, some other host already uses address $ipaddr."
 				val_ipaddr=0
 			else
