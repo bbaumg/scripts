@@ -8,7 +8,7 @@ source "$v_scripts/functions.sh"
 
 
 logger "Performing YUM installation"
-yum install -y wget vim lynx openssh-clients ntsysv ntp traceroute mysql mysql-server mysql-devel httpd httpd-devel curl curl-devel subversion
+yum install -y wget vim lynx openssh-clients ntsysv ntp traceroute mysql mysql-server mysql-devel httpd httpd-devel curl curl-devel subversion libyaml-devel
 logger "Creating rails folder"
 mkdir -p /var/www/rails
 logger "Setting service run levels and starting services"
