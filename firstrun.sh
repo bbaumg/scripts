@@ -76,13 +76,13 @@ until [ "$val_allgood" == "YES" ]; do
 	fi
 	#echo -n "Enter the DNS [ENTER]: "
 	echo -en "\n\nPlease check the settings are right?\n\n"\
-	"Hostname:  $v_hostname"\
-	"IPADDR: $ipaddr\n"\
-	"NETMASK: $netmask\n"\
-	"GATEWAY: $gateway\n"\
-	"$dns"
+"Hostname:  $v_hostname\n"\
+"IPADDR: $ipaddr\n"\
+"NETMASK: $netmask\n"\
+"GATEWAY: $gateway\n"\
+"$dns\n\n"
 	read -e -p "Is everything Right [yes]: " val_allgood
-	if [ "$val_allgood" == '' ]; then v_allgood='YES'; fi
+	if [ "$val_allgood" == '' ]; then val_allgood='YES'; fi
 done
 
 # Install any apps?
