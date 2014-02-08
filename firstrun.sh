@@ -7,6 +7,7 @@ v_defaultapps='logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv n
 
 # Verify it has not run before
 if [ "$1" == "test" ]; then
+	echo -e "\nRunning in Testing mode...\n\n"
 	rm -f "$log"
 	v_testing=1
 fi
@@ -209,4 +210,4 @@ service network restart
 #awk '!/firstboot/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
 sed -i --follow-symlinks '/firstboot/d' /etc/rc.local
 sed -i --follow-symlinks '/firstrun/d' /etc/rc.local
-reboot
+if [ "$v_testing" == 1 ]; then reboot; fi
