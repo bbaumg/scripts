@@ -1,7 +1,7 @@
 #!/bin/bash
 #Variables
 log="/var/log/firstboot.log"
-$admins='admins'
+admins='admins'
 
 # Verify it has not run before
 if [ -f "$log" ]; then exit 1; fi
@@ -14,7 +14,8 @@ until [ $val_admin ]; do
 	read -e -p "Enter the first admin's uername [ENTER]: " admin
 	#Create user groups
 	echo -e "\nAdding admins" | tee -a $log
-	groupadd admins
+	checkgroups=`grep "$admins" /etc/group | wc -l`
+	if [ "$checkgroups" != 1 ]; then groupadd admins; fi
 	useradd --groups "$admins" $admin
 	checkadmin=`grep $admin /etc/passwd | wc -l`
 	if [ "$checkadmin" == 1 ]; then
