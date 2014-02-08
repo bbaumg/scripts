@@ -38,6 +38,7 @@ svn export $v_site_ver /var/www/$v_site
 logger "Configure the wordpress instance"
 
 logger "Configure httpd for new site"
+echo > /etc/httpd/conf.d/$v_site.conf
 echo -e "\nNameVirtualHost *:80\n"\
 "<VirtualHost *:80>\n"\
 "   UseCanonicalName Off\n"\
