@@ -30,7 +30,7 @@ done
 echo
 passwd $admin
 
-until [ "${$val_allgood^^" == "YES" ]; do
+until [ "${$val_allgood^^}" == "YES" ]; do
 	val_ipaddr='0'
 	val_netmask='0'
 	val_gateway='0'
