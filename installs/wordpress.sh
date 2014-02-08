@@ -20,6 +20,8 @@ chkconfig mysqld on
 service mysqld start
 chkconfig httpd on
 service httpd start
+chkconfig iptables off
+service iptables stop
 
 logger "Create the database"
 echo -e "create database $v_db character set utf8;\n"\
@@ -33,9 +35,21 @@ mysql < $v_scripts/createdb.sql
 logger "Download Wordpress"
 svn export $v_site_ver /var/www/$v_site
 
-logger "Coonfigure the wordpress instance"
+logger "Configure the wordpress instance"
 
-logger "Restart httpd"
+logger "Configure httpd for new site"
+echo -e "\nNameVirtualHost *:80\n"\
+"<VirtualHost *:80>\n"\
+"   UseCanonicalName Off\n"\
+"   DocumentRoot /var/www/$v_site/\n"\
+"   <Directory /var/www/$v_site/>\n"\
+"      Options +FollowSymLinks\n"\
+"      AllowOverride all\n"\
+"      Order allow,deny\n"\
+"      Allow from all\n"\
+"   </Directory>\n"\
+"</VirtualHost>\n"\
+>> /etc/httpd/conf.d/$v_site.conf
 service httpd restart
 
 
