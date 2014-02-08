@@ -6,14 +6,17 @@ v_appinstall_url='https://raw.github.com/bbaumg/scripts/master/installs/install.
 v_defaultapps='logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git'
 
 # Verify it has not run before
-if [ "$1" == "test" ]; then rm -f "$log"; fi
+if [ "$1" == "test" ]; then
+	rm -f "$log"
+	v_testing=1
+fi
 if [ -f "$log" ]; then exit 1; fi
 source /etc/init.d/functions
 clear
 
 echo -en "Beginning base configuration...\n\n"
 # Setup initial admin and groups
-if [ "$1" == "test" ]; then val_admin=1; fi
+if [ "$v_testing" == 1 ]; then val_admin=1; fi
 until [ "$val_admin" == 1 ]; do
 	read -e -p "Enter the first admin's uername [ENTER]: " admin
 	#Create user groups
@@ -31,7 +34,7 @@ until [ "$val_admin" == 1 ]; do
 	echo
 done
 
-if [ "$1" == "test" ]; then 
+if [ "$v_testing" == 1 ]; then 
 	echo
 	passwd $admin
 fi
