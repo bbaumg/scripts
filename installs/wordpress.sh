@@ -37,7 +37,9 @@ mysql < $v_scripts/createdb.sql
 logger "Download Wordpress"
 #svn export $v_site_ver $v_site_root/$v_site
 cd $v_site_root
-wget $v_site_ver -o temp.zip && unzip temp.zip && rm -f temp.zip
+wget $v_site_ver
+unzip latest.zip
+rm -f latest.zip
 
 logger "Configure the wordpress instance"
 
