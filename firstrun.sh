@@ -133,11 +133,7 @@ echo "-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT" >> $ipt
 echo "-A INPUT -p icmp -j ACCEPT" >> $ipt
 echo "-A INPUT -i lo -j ACCEPT" >> $ipt
 echo "-A INPUT -m tcp -p tcp --dport 7 -j ACCEPT" >> $ipt
-echo "#-A INPUT -s 172.16.0.0/16 -m state --state NEW -p tcp --dport 1621 -j ACCEPT" >> $ipt
-echo "#-A INPUT -s 172.16.0.0/16 -m state --state NEW -p tcp --dport 1521 -j ACCEPT" >> $ipt
-echo "# Open SSH to local subnet" >> $ipt
 echo "-A INPUT -s ${iparray[0]}.${iparray[1]}.${iparray[2]}.0/24 -m state --state NEW -p tcp --dport 22 -j ACCEPT" >> $ipt
-echo "# Example SSH Access" >> $ipt
 echo "" >> $ipt
 echo "#SNMP" >> $ipt
 echo "-A INPUT -p udp --dport 161 -j ACCEPT" >> $ipt
