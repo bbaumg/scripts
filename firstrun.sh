@@ -11,7 +11,6 @@ clear
 echo -en "Beginning base configuration...\n\n"
 # Setup initial admin and groups
 until [ $val_admin ]; do
-	#echo -en "Enter the first admin's uername [ENTER]: "
 	read -e -p "Enter the first admin's uername [ENTER]: " admin
 	#Create user groups
 	echo -e "\nAdding admins" | tee -a $log
@@ -31,7 +30,7 @@ done
 echo
 passwd $admin
 
-until [ "${$val_allgood^^}" == "YES" ]; do
+until [ "$val_allgood" == "YES" ]; do
 	val_ipaddr='0'
 	val_netmask='0'
 	val_gateway='0'
