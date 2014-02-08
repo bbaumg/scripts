@@ -12,7 +12,7 @@ clear
 
 echo -en "Beginning base configuration...\n\n"
 # Setup initial admin and groups
-if [ "$1" == "test" ]; then $val_admin=1; fi
+if [ "$1" == "test" ]; then val_admin=1; fi
 until [ "$val_admin" == 1 ]; do
 	read -e -p "Enter the first admin's uername [ENTER]: " admin
 	#Create user groups
