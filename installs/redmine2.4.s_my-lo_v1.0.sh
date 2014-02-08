@@ -20,9 +20,12 @@ chkconfig mysqld on
 logger "Beginning install of RVM"
 bash <(curl -sL https://get.rvm.io)
 source /etc/profile.d/rvm.sh
+logger "Installing Ruby...  Which will fail"
+rvm install 2.0
+logger "Installing of RVM again"
 bash <(curl -sL https://get.rvm.io)
 source /etc/profile.d/rvm.sh
-logger "Installing Ruby"
+source "Installing Ruby again"
 rvm install 2.0
 logger "Installing freetds"
 yum install -y freetds freetds-devel
