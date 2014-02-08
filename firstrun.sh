@@ -30,41 +30,41 @@ done
 echo
 passwd $admin
 
-until [ $val_allgood == "YES" ]; do
-	val_ipaddr=''
-	val_netmask=''
-	val_gateway=''
+until [ "${$val_allgood^^" == "YES" ]; do
+	val_ipaddr='0'
+	val_netmask='0'
+	val_gateway='0'
 	# Collecting system information
 	echo -en "\nEnter the hostname [ENTER]: "
 	read v_hostname
 	v_hostname=${v_hostname^^}
 	#hostname $v_hostname
-	until [ $val_ipaddr ]; do
-	        echo -n "Enter the IP address [ENTER]: "
-	        read ipaddr
+	until [ "$val_ipaddr" == 1 ]; do
+	        read -e -p "Enter the IP address [ENTER]: " -i "$ipaddr" ipaddr
 	        if [[ ! $ipaddr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	                echo "That is not a valid address...  Please enter it again."
 	        else
-	                val_ipaddr=true
+	                val_ipaddr=1
 	        fi
 	done
-	until [ $val_netmask ]; do
+	until [ "$val_netmask" == 1]; do
 	        #echo -n "Enter the netmask [ENTER]: "
 	        #read netmask
 	        netmask='255.255.255.0'
 	        if [[ ! $netmask =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	                echo "That is not a valid address...  Please enter it again."
 	        else
-	                val_netmask=true
+	                val_netmask=1
 	        fi
 	done       
-	until [ $val_gateway ]; do
-	        echo -n "Enter the gateway [ENTER]: "
-	        read gateway
+	until [ "$val_gateway" == 1 ]; do
+	        #echo -n "Enter the gateway [ENTER]: "
+	        #if [ "$gateway" == '' ]; then 
+	        read -e -p "Enter the gateway [ENTER]: " -i "$gateway" gateway
 	        if [[ ! $gateway =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	                echo "That is not a valid address...  Please enter it again."
 	        else
-	                val_gateway=true
+	                val_gateway=1
 	        fi
 	done
 	echo -en "On net or Off [0=Off, 1=On]: "
@@ -75,10 +75,14 @@ until [ $val_allgood == "YES" ]; do
 	        dns="DNS1=8.8.8.8\nDNS2=8.8.4.4"    
 	fi
 	#echo -n "Enter the DNS [ENTER]: "
-	echo -en "Is all of this information correct?\n\n"\
+	echo -en "\n\nPlease check the settings are right?\n\n"\
 	"Hostname:  $v_hostname"\
-	"IPADDR: $ipaddr\nNETMASK: $netmask\nGATEWAY: $gateway\n$dns"\
-	read -i "yes" -e -p "Yes or No: " val_allgood && val_allgood=${val_allgood^^}
+	"IPADDR: $ipaddr\n"\
+	"NETMASK: $netmask\n"\
+	"GATEWAY: $gateway\n"\
+	"$dns"
+	read -e -p "Is everything Right [yes]: " val_allgood
+	if [ "$val_allgood" == '' ]; then v_allgood='YES'; fi
 done
 
 # Install any apps?
