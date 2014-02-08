@@ -44,7 +44,7 @@ until [ "$val_allgood" == "YES" ]; do
 	        if [[ ! $ipaddr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	                echo "That is not a valid address...  Please enter it again."
 	        else
-	                val_ipaddr=1
+	                val_ipaddr= "1"
 	        fi
 	done
 	until [ "$val_netmask" == 1]; do
