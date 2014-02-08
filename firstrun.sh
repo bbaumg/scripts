@@ -70,7 +70,10 @@ until [ "$val_allgood" == "YES" ]; do
 	done       
 	until [ "$val_gateway" == 1 ]; do
 	        #echo -n "Enter the gateway [ENTER]: "
-	        #if [ "$gateway" == '' ]; then 
+	        if [ "$gateway" == '' ]; then 
+	        	iparray=(`echo $ipaddr | tr "." " "`)
+	        	gateway="${iparray[0]}.${iparray[01}.${iparray[2]}."
+	        fi
 	        read -e -p "Enter the gateway [ENTER]: " -i "$gateway" gateway
 	        if [[ ! $gateway =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	                echo "That is not a valid address...  Please enter it again."
