@@ -22,7 +22,7 @@ if [ -f "$v_install" ]; then
         rm -f "$v_install"
         logger "Starting the Install...\n\n\n"
         sleep 5
-        bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
+        bash <(curl -s "$v_appurl") 2>&1 | tee -a "$v_log"
         logger "Installation has completed"
 else
         source <(curl -s "$c_repo/installs/list.sh")
