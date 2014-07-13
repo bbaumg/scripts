@@ -2,7 +2,7 @@
 
 #log="/var/log/installs.log"
 c_dir='/var/scripts/installs'
-c_repo="https://raw.githubusercontet.com/bbaumg/scripts/master"
+c_repo="https://raw.githubusercontent.com/bbaumg/scripts/master"
 v_install="$c_dir/install.run"
 #if [ -f "$log" ]; then exit 1; fi
 
