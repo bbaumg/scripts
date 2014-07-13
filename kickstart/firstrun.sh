@@ -215,4 +215,4 @@ echo 'Cleaning up the build'
 #awk '!/firstboot/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
 sed -i --follow-symlinks '/firstboot/d' /etc/rc.local
 sed -i --follow-symlinks '/firstrun/d' /etc/rc.local
-if [ "$v_testing" == 1 ]; then reboot; fi
+if [ "$v_testing" != 1 ]; then reboot; fi
