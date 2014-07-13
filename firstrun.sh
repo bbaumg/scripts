@@ -2,6 +2,7 @@
 #Variables
 log="/var/log/firstboot.log"
 admins='admins'
+v_repo='https://raw.github.com/bbaumg/scripts/master/'
 v_appinstall_url='https://raw.github.com/bbaumg/scripts/master/installs/install.sh'
 v_defaultapps='logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git'
 
@@ -157,8 +158,9 @@ service iptables restart | tee -a $log
 echo "Configuring sudoers" | tee -a $log
 echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
-# Setup MOTD to run at login
+# Setup MOTD and download the banner
 echo "Settup MOTD" | tee -a $log
+curl 
 sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
