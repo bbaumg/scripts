@@ -25,7 +25,7 @@ if [ -f "$v_install" ]; then
         bash <(curl -sL "$v_appurl") 2>&1 | tee -a "$v_log"
         logger "Installation has completed"
 else
-        source <(curl -sL "$c_repo/installs/list.sh")
+        source <(curl -s "$c_repo/installs/list.sh")
         if [ -z ${v_apps[0]} ]; then
                 echo -e "\n\n\n\n\n***********************************************************************"
                 echo -e "Unable to load the list of installation options"
