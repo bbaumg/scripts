@@ -2,7 +2,7 @@
 #Variables
 log="/var/log/firstboot.log"
 admins='admins'
-v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
+v_repo='https://raw.github.com/bbaumg/scripts/master'
 v_appinstall_url="$v_repo/installs/install.sh"
 v_defaultapps="logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git"
 
