@@ -169,12 +169,13 @@ sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
 #Update, upgrade, and install apps
-echo "YUM update" | tee -a $log
-yum update -y | tee -a $log
-echo "YUM upgrade" | tee -a $log
+#echo "YUM update" | tee -a $log
+#yum update -y | tee -a $log
+echo "Running YUM upgrade" | tee -a $log
 yum upgrade -y | tee -a $log
-echo "Install apps" | tee -a $log
-yum install -y "$v_defaultapps" | tee -a $log
+echo "Installing apps" | tee -a $log
+#yum install -y "$v_defaultapps" | tee -a $log
+yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git | tee -a $log
 echo "Cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
