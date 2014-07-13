@@ -178,17 +178,18 @@ yum clean all | tee -a $log
 #curl -L $v_app_1 | bash 2>&1 | tee 
 
 #Install the MCP
-v_mpc="/var/scripts/mcp.sh"
-mkdir /var/scripts
-echo '#!/bin/bash' > $v_mpc
-echo 'echo "Starting MCP (Minion Control Program)"' >> $v_mpc
-echo 'echo "Getting the most up to date minion.sh"' >> $v_mpc
-echo 'wget --output-document=/var/scripts/minion.sh https://raw.github.com/bbaumg/scripts/master/minion/minion.sh' >> $v_mpc
-echo 'echo "Run MCP"' >> $v_mpc
-echo 'bash /var/scripts/minion.sh 2>&1 | tee -a /var/log/minion.log' >> $v_mpc
-bash /var/scripts/mcp.sh
+#v_mpc="/var/scripts/mcp.sh"
+#mkdir /var/scripts
+#echo '#!/bin/bash' > $v_mpc
+#echo 'echo "Starting MCP (Minion Control Program)"' >> $v_mpc
+#echo 'echo "Getting the most up to date minion.sh"' >> $v_mpc
+#echo 'wget --output-document=/var/scripts/minion.sh https://raw.github.com/bbaumg/scripts/master/minion/minion.sh' >> $v_mpc
+#echo 'echo "Run MCP"' >> $v_mpc
+#echo 'bash /var/scripts/minion.sh 2>&1 | tee -a /var/log/minion.log' >> $v_mpc
+#bash /var/scripts/mcp.sh
 
 #Configure the NIC card
+echo 'Setting and configuring the NIC'
 eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
 if [ ! -f "$eth0" ]; then
         echo "Making a backup of '$eth0'" | tee -a $log
@@ -210,6 +211,7 @@ echo -en "DEVICE=eth0\n"\
 service network restart
 
 #Cleanup and reboot
+echo 'Cleaning up the build'
 #awk '!/firstboot/' /etc/rc.local > /etc/rc.local.tmp && mv -f /etc/rc.local.tmp /etc/rc.local
 sed -i --follow-symlinks '/firstboot/d' /etc/rc.local
 sed -i --follow-symlinks '/firstrun/d' /etc/rc.local
