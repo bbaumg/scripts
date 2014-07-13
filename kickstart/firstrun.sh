@@ -2,7 +2,7 @@
 #Variables
 log="/var/log/firstboot.log"
 admins='admins'
-v_repo='https://raw.github.com/bbaumg/scripts/master/'
+v_repo='https://raw.github.com/bbaumg/scripts/master/kickstart/'
 v_appinstall_url='https://raw.github.com/bbaumg/scripts/master/installs/install.sh'
 v_defaultapps='logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git'
 
@@ -160,7 +160,7 @@ echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 # Setup MOTD and download the banner
 echo "Settup MOTD" | tee -a $log
-curl 
+curl "$v_repo/motd.sh" > /etc/motd.sh
 sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
