@@ -6,7 +6,7 @@
 rc='/etc/rc.local'
 sed -i --follow-symlinks '/firstboot/d' $rc
 sed -i --follow-symlinks '/firstrun/d' $rc
-echo "curl -sL https://raw.github.com/bbaumg/scripts/master/firstrun.sh > /etc/firstrun.sh" >> $rc
+echo "curl -sL https://raw.github.com/bbaumg/scripts/master/kickstart/firstrun.sh > /etc/firstrun.sh" >> $rc
 echo "chmod 755 /etc/firstrun.sh" >> $rc
 echo "bash /etc/firstrun.sh" >> $rc
 
