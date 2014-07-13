@@ -174,8 +174,8 @@ echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 echo "Running YUM upgrade" | tee -a $log
 yum upgrade -y | tee -a $log
 echo "Installing apps" | tee -a $log
-#yum install -y "$v_defaultapps" | tee -a $log
-yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git | tee -a $log
+bash <(echo "yum install -y $v_defaultapps") | tee -a $log
+#yum install -y logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl git | tee -a $log
 echo "Cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
