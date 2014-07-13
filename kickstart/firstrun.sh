@@ -113,7 +113,7 @@ until [ "$val_allgood" == "YES" ]; do
 done
 
 # Install any apps?
-bash <(curl -sL "$v_appinstall_url" ) 'firstboot'
+#bash <(curl -sL "$v_appinstall_url" ) 'firstboot'
 
 # Set the Hostname
 sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
@@ -164,6 +164,7 @@ echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 # Setup MOTD and download the banner
 echo "Settup MOTD" | tee -a $log
 curl "$v_repo/kickstart/motd.sh" > /etc/motd.sh
+curl "$v_repo/kickstart/banner" > /etc/banner
 sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
