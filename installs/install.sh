@@ -2,7 +2,7 @@
 
 #log="/var/log/installs.log"
 c_dir='/var/scripts/installs'
-c_repo="https://raw.github.com/bbaumg/scripts/master"
+c_repo="https://raw.githubusercontet.com/bbaumg/scripts/master"
 v_install="$c_dir/install.run"
 #if [ -f "$log" ]; then exit 1; fi
 
@@ -48,10 +48,10 @@ else
                 echo "$(echo "${v_apps[$v_app]}" | awk -F', ' '{print $1}') will install after the next reboot"
                 mkdir -p $c_dir
                 echo "${v_apps[$v_app]}" > $v_install
-                rc='/etc/rc.local'
-                echo "curl -sL $c_repo/installs/install.sh > $c_dir/install.sh" >> $rc
-                echo "chmod 755 $c_dir/install.sh" >> $rc
-                echo "bash $c_dir/install.sh" >> $rc
+                sed -i --follow-symlinks '/install.sh/d' /etc/rc.local
+                echo "curl -s $c_repo/installs/install.sh > $c_dir/install.sh" >> /etc/rc.local
+                echo "chmod 755 $c_dir/install.sh" >> /etc/rc.local
+                echo "bash $c_dir/install.sh" >> /etc/rc.local
                 echo "Installation will begin when system resumes from the next reboot"
                 if [ "$1" != 'firstboot' ]; then echo -n "System is rebooting now...  "; sleep 3; reboot; fi
         else
