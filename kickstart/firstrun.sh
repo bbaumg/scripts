@@ -19,7 +19,10 @@ clear
 
 echo -en "Beginning base configuration...\n\n"
 # Setup initial admin and groups
-if [ "$v_testing" == 1 ]; then val_admin=1; fi
+if [ "$v_testing" == 1 ]; then 
+	echo 'Testing Mode:  Skipping user creation'
+	val_admin=1
+fi
 until [ "$val_admin" == 1 ]; do
 	read -e -p "Enter the first admin's uername [ENTER]: " admin
 	#Create user groups
@@ -37,7 +40,7 @@ until [ "$val_admin" == 1 ]; do
 	echo
 done
 
-if [ "$v_testing" == 1 ]; then 
+if [ "$v_testing" != 1 ]; then 
 	echo
 	passwd $admin
 fi
