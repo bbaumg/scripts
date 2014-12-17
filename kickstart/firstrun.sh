@@ -93,11 +93,11 @@ until [ "$val_allgood" == "YES" ]; do
 	                val_gateway=1
 	        fi
 	done
-#	echo -en "On net or Off [0=Off, 1=On]: "
-#	read onnet
+	echo -en "On net or Off [0=Off, 1=On]: "
+	read onnet
 	onnet=0
 	if [ "$onnet" = "1" ]; then
-	        dns="DNS1=172.16.121.19\nDNS2=172.16.121.41\nDNS3=172.16.0.57\nDNS4=172.16.1.40"
+	        dns="DNS1=10.105.120.50\nDNS2=10.105.120.51\nDNS3=10.105.120.50\nDNS4=172.16.1.41"
 	else
 	        dns="DNS1=8.8.8.8\nDNS2=8.8.4.4"    
 	fi
