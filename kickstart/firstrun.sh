@@ -96,7 +96,7 @@ until [ "$val_allgood" == "YES" ]; do
 	echo -en "On net or Off [0=Off, 1=On]: "
 	read onnet
 	onnet=0
-	if [ "$onnet" = "1" ]; then
+	if [ "$onnet" == "1" ]; then
 	        dns="DNS1=10.105.120.50\nDNS2=10.105.120.51\nDNS3=10.105.120.50\nDNS4=172.16.1.41"
 	else
 	        dns="DNS1=8.8.8.8\nDNS2=8.8.4.4"    
