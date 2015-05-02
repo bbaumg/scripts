@@ -11,7 +11,7 @@ echo "chmod 755 /etc/firstrun.sh" >> $rc
 echo "bash /etc/firstrun.sh" >> $rc
 
 # Configure the NIC card for a general DHCP initial boot
-eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
+eth0=$(ls /etc/sysconfig/network-scripts/ifcfg-* | grep --invert-match ifcfg-lo)
 echo -e "DEVICE=eth0\n"\
 "TYPE=Ethernet\n"\
 "ONBOOT=yes\n"\
