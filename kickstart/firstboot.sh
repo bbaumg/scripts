@@ -32,5 +32,5 @@ rm -f /etc/ssh/*key*
 rm -rf /etc/ssh/ssh_host_*
 rm -rf /etc/udev/rules.d/70-*
 sleep 3
-unset HISTFILE
+history -c
 sys-unconfig
