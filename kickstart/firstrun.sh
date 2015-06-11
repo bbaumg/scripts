@@ -149,6 +149,7 @@ echo "-A INPUT -p icmp -j ACCEPT" >> $ipt
 echo "-A INPUT -i lo -j ACCEPT" >> $ipt
 echo "-A INPUT -m tcp -p tcp --dport 7 -j ACCEPT" >> $ipt
 echo "-A INPUT -s ${iparray[0]}.${iparray[1]}.0.0/16 -m state --state NEW -p tcp --dport 22 -j ACCEPT" >> $ipt
+echo "-A INPUT -s 172.16.150.0/24 -m state --state NEW -p tcp --dport 22 -j ACCEPT" >> $ipt
 echo "-A INPUT -s 192.168.56.1 -m state --state NEW -p tcp --dport 22 -j ACCEPT" >> $ipt
 echo "" >> $ipt
 echo "#SNMP" >> $ipt
