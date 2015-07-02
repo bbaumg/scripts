@@ -46,3 +46,4 @@ git config --global user.name "Barrett"
 git config --global credential.helper store
 git clone https://github.com/bbaumg/automation.git
 sudo bash automation/install.sh
+echo -en "\n-------------------------------------------------------\nBuild Complete\n\n"
