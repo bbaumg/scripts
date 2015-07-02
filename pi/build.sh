@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#sudo raspi-config
+sudo raspi-config
 sudo apt-get update -y
 sudo apt-get dist-upgrade -y
 sudo apt-get install -y python3-pip python3-dev vim git-core locate
