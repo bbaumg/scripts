@@ -8,10 +8,11 @@ sudo apt-get update -y
 sudo apt-get dist-upgrade -y
 sudo apt-get install -y python3-pip python3-dev vim git-core locate
 sudo pip-3.2 install pyephem pymysql configparser
+echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n"
 echo -en "\n# Some stuff I added\n"\
 "alias ll='ls -alh'\n"\
 "export EDITOR=vim\n" >> .bashrc
-
+echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n"
 echo -en ""\
 "# Edit this file to introduce tasks to be run by cron.\n"\
 "# \n"\
@@ -38,6 +39,7 @@ echo -en ""\
 "\n"\
 "0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" >> rootcrontab
 sudo crontab rootcrontab
+echo -en "\n-------------------------------------------------------\nSetting up git\n\n"
 cd $HOME
 git config --global user.email "bbaumg@gmail.com"
 git config --global user.name "Barrett"
