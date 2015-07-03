@@ -6,12 +6,13 @@
 sudo raspi-config
 sudo apt-get update -y
 sudo apt-get dist-upgrade -y
-sudo apt-get install -y python3-pip python3-dev vim git-core locate
+sudo apt-get install -y python3-pip python3-dev vim git-core locate build-essential scons swig
 sudo pip-3.2 install pyephem pymysql configparser
 echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n"
 echo -en "\n# Some stuff I added\n"\
 "alias ll='ls -alh'\n"\
-"export EDITOR=vim\n" >> .bashrc
+"export EDITOR=vim\n"
+"alias python=python3\n" >> .bashrc
 echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n"
 echo -en ""\
 "# Edit this file to introduce tasks to be run by cron.\n"\
@@ -44,6 +45,16 @@ cd $HOME
 git config --global user.email "bbaumg@gmail.com"
 git config --global user.name "Barrett"
 git config --global credential.helper store
+echo -en "\n-------------------------------------------------------\nInstall Dependencies\n\n"
+cd $HOME
+git clone https://github.com/jgarff/rpi_ws281x.git
+cd rpi_ws281x
+scons
+cd python
+sudo python3 setup.py install
+echo -en "\n-------------------------------------------------------\nInstall Automation\n\n"
+cd $HOME
 git clone https://github.com/bbaumg/automation.git
 #sudo bash automation/install.sh
+
 echo -en "\n-------------------------------------------------------\nBuild Complete\n\n"
