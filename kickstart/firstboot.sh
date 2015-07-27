@@ -19,8 +19,12 @@ echo -e "DEVICE=$entname\n"\
 "NM_CONTROLLED=yes\n"\
 "BOOTPROTO=dhcp" > $eth0
 
-# Adjust rc.sysinit so sys-unconfig does not prompt for auth type
-sed -i --follow-symlinks 's/authconfig-tui\ --nostart/authconfig-tui\ --nostart\ --kickstart/g' /etc/rc.sysinit
+# If RHEL 6 Adjust rc.sysinit so sys-unconfig does not prompt for auth type
+OSVer=$(cat /etc/redhat-release | grep -oE '[0-9]+\.[0-9]+' | awk -F '.' '{print $1}')
+if [ $OSVer -eq '6' ]; then
+  sed -i --follow-symlinks 's/authconfig-tui\ --nostart/authconfig-tui\ --nostart\ --kickstart/g' /etc/rc.sysinit
+fi
+
 
 rm -f /var/log/firstboot.log
 logrotate -f /etc/logrotate.conf
