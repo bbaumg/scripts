@@ -117,6 +117,7 @@ done
 #bash <(curl -sL "$v_appinstall_url" ) 'firstboot'
 
 # Set the Hostname
+#  Centos7 verified
 sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
 
 #Enable eth0
@@ -197,12 +198,14 @@ yum clean all | tee -a $log
 
 #Configure the NIC card
 echo 'Setting and configuring the NIC'
+sleep 1
 entname=$(ip addr | awk -F ": " '!/  /{print $2}' | grep --invert-match 'lo')
 eth0='/etc/sysconfig/network-scripts/ifcfg-'$entname
 if [ ! -f "$eth0" ]; then
         echo "Making a backup of '$eth0'" | tee -a $log
         cp -f $eth0 $eth0.backup
 fi
+sleep 3
 rm -rf /etc/udev/rules.d/70-*
 echo "Configuring the NIC:" | tee -a $log
 mac=$(cat /sys/class/net/eth0/address)
@@ -216,6 +219,7 @@ echo -en "DEVICE=eth0\n"\
 "NETMASK=$netmask\n"\
 "GATEWAY=$gateway\n"\
 "$dns" > $eth0
+sleep 3
 service network restart
 
 #Cleanup and reboot
