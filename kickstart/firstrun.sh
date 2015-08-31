@@ -113,25 +113,20 @@ until [ "$val_allgood" == "YES" ]; do
 	if [ "$val_allgood" == '' ]; then val_allgood='YES'; fi
 done
 
-# Install any apps?
-#bash <(curl -sL "$v_appinstall_url" ) 'firstboot'
-
 # Set the Hostname
-#  Centos7 verified
 sed -c -i "s/\(HOSTNAME *= *\).*/\HOSTNAME=$v_hostname/" /etc/sysconfig/network
-
-#Enable eth0
-#ifup eth0  #This should no longer be needed.
 
 #Set grub to show messages during boot
 echo "Set machine to show messages during boot process" | tee -a $log
 sed -i --follow-symlinks 's/rhgb\ //g' /etc/grub.conf
 
 #Disable SELINUX
+#  Centos7 tested
 echo "Disabling SELINUX" | tee -a $log
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 #Secure SSH
+#  Centos7 tested
 echo "Locking down SSH" | tee -a $log
 sshconf="/etc/ssh/sshd_config"
 sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
@@ -162,6 +157,7 @@ echo "COMMIT" >> $ipt
 service iptables restart | tee -a $log
 
 #Configure Sudoers
+#  Centos7 tested
 echo "Configuring sudoers" | tee -a $log
 echo "%admins       ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
@@ -173,8 +169,7 @@ sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 
 #Update, upgrade, and install apps
-#echo "YUM update" | tee -a $log
-#yum update -y | tee -a $log
+#  Centos7 tested
 echo "Running YUM upgrade" | tee -a $log
 yum upgrade -y | tee -a $log
 echo "Installing apps" | tee -a $log
@@ -182,21 +177,8 @@ bash <(echo "yum install -y $v_defaultapps") | tee -a $log
 echo "Cleanup installs" | tee -a $log
 yum clean all | tee -a $log
 
-# Install custom apps
-#curl -L $v_app_1 | bash 2>&1 | tee 
-
-#Install the MCP
-#v_mpc="/var/scripts/mcp.sh"
-#mkdir /var/scripts
-#echo '#!/bin/bash' > $v_mpc
-#echo 'echo "Starting MCP (Minion Control Program)"' >> $v_mpc
-#echo 'echo "Getting the most up to date minion.sh"' >> $v_mpc
-#echo 'wget --output-document=/var/scripts/minion.sh https://raw.github.com/bbaumg/scripts/master/minion/minion.sh' >> $v_mpc
-#echo 'echo "Run MCP"' >> $v_mpc
-#echo 'bash /var/scripts/minion.sh 2>&1 | tee -a /var/log/minion.log' >> $v_mpc
-#bash /var/scripts/mcp.sh
-
 #Configure the NIC card
+#  Centos7 tested
 echo 'Setting and configuring the NIC'
 entname=$(ip addr | awk -F ": " '!/  /{print $2}' | grep --invert-match 'lo')
 eth0='/etc/sysconfig/network-scripts/ifcfg-'$entname
@@ -214,7 +196,6 @@ echo -en "DEVICE=$entname\n"\
 "GATEWAY=$gateway\n"\
 "$dns" > $eth0
 cat $eth0
-service network restart
 
 #Cleanup and reboot
 echo 'Cleaning up the build'
