@@ -5,6 +5,7 @@ admins='admins'
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
 v_appinstall_url="$v_repo/installs/install.sh"
 v_defaultapps="logrotate bind-utils cifs-utils vim openssh-clients wget ntsysv ntp traceroute lynx ftp sudoers curl mlocate"
+OSVer=$(cat /etc/redhat-release | grep -oE '[0-9]+\.[0-9]+' | awk -F '.' '{print $1}')
 
 if [ "$1" == "test" ]; then
 	echo -e "\nRunning in Testing mode...\n\n"
@@ -196,7 +197,8 @@ yum clean all | tee -a $log
 
 #Configure the NIC card
 echo 'Setting and configuring the NIC'
-eth0="/etc/sysconfig/network-scripts/ifcfg-eth0"
+entname=$(ip addr | awk -F ": " '!/  /{print $2}' | grep --invert-match 'lo')
+eth0='/etc/sysconfig/network-scripts/ifcfg-'$entname
 if [ ! -f "$eth0" ]; then
         echo "Making a backup of '$eth0'" | tee -a $log
         cp -f $eth0 $eth0.backup
