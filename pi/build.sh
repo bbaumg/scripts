@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Variables
+v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
+
 #curl "https://raw.githubusercontent.com/bbaumg/scripts/master/pi/build.sh" > build.sh
 #sudo bash build.sh
 
@@ -40,6 +43,10 @@ echo -en ""\
 "\n"\
 "0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" >> rootcrontab
 sudo crontab rootcrontab
+echo -en "\n-------------------------------------------------------\nSettup MOTD\n\n"
+curl "$v_repo/kickstart/motd.sh" > /etc/motd.sh
+sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
+echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 echo -en "\n-------------------------------------------------------\nSetting up git\n\n"
 cd $HOME
 git config --global user.email "bbaumg@gmail.com"
