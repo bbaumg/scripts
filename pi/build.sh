@@ -1,15 +1,19 @@
 #!/bin/bash
 
+# Instructions:
+# Run the two below commands on the pi.
+# curl "https://raw.githubusercontent.com/bbaumg/scripts/master/pi/build.sh" > build.sh
+# sudo bash build.sh
+
 #Variables
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
-
-#curl "https://raw.githubusercontent.com/bbaumg/scripts/master/pi/build.sh" > build.sh
-#sudo bash build.sh
+v_gitEmail='bbaumg@gmail.com'
+v_gitUser='Barrett'
 
 sudo raspi-config
 sudo apt-get update -y
 sudo apt-get dist-upgrade -y
-sudo apt-get install -y python3-pip python3-dev vim git-core locate build-essential scons swig
+sudo apt-get install -y python3-pip python3-dev vim git-core locate build-essential scons swig htop
 sudo pip-3.2 install pyephem pymysql configparser
 echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n"
 echo -en "\n# Some stuff I added\n"\
@@ -44,13 +48,14 @@ echo -en ""\
 "0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" >> rootcrontab
 sudo crontab rootcrontab
 echo -en "\n-------------------------------------------------------\nSettup MOTD\n\n"
+curl "$v_repo/kickstart/banner" > /etc/banner
 curl "$v_repo/kickstart/motd.sh" > /etc/motd.sh
 sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> /etc/bashrc
 echo -en "\n-------------------------------------------------------\nSetting up git\n\n"
 cd $HOME
-git config --global user.email "bbaumg@gmail.com"
-git config --global user.name "Barrett"
+git config --global user.email "$v_gitEmail"
+git config --global user.name "$v_gitUser"
 git config --global credential.helper store
 echo -en "\n-------------------------------------------------------\nInstall Dependencies\n\n"
 cd $HOME
