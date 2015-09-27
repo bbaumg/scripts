@@ -6,6 +6,7 @@
 # sudo bash build.sh
 
 #Variables
+log="/var/log/pibuild.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
 v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
 v_gitEmail='bbaumg@gmail.com'
@@ -13,24 +14,24 @@ v_gitUser='Barrett'
 
 # OK, let's install all of the basic stuff and do the basline configurations
 sudo raspi-config
-echo -en "\n-------------------------------------------------------\napt-get update\n\n"
-sudo apt-get update -y
-echo -en "\n-------------------------------------------------------\napt-get dist-upgrade\n\n"
+echo -en "\n-------------------------------------------------------\napt-get update\n\n" | tee -a $log
 sudo apt-get dist-upgrade -y
-echo -en "\n-------------------------------------------------------\napt-get install\n\n"
+echo -en "\n-------------------------------------------------------\napt-get install\n\n" | tee -a $log
+sudo apt-get update -y
+echo -en "\n-------------------------------------------------------\napt-get dist-upgrade\n\n" | tee -a $log
 sudo apt-get install -y $v_defaultapps
-echo -en "\n-------------------------------------------------------\npip3.2 install\n\n"
+echo -en "\n-------------------------------------------------------\npip3.2 install\n\n" | tee -a $log
 sudo pip-3.2 install pyephem pymysql configparser
 
 
-echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n"
+echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n" | tee -a $log
 echo -en "\n# Some stuff I added\n"\
 "alias ll='ls -alh'\n"\
 "export EDITOR=vim\n"\
 "alias python=python3\n" >> .bashrc
 
 
-echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n"
+echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n" | tee -a $log
 echo -en ""\
 "# Edit this file to introduce tasks to be run by cron.\n"\
 "# \n"\
@@ -59,21 +60,21 @@ echo -en ""\
 sudo crontab rootcrontab
 
 
-echo -en "\n-------------------------------------------------------\nSettup MOTD\n\n"
+echo -en "\n-------------------------------------------------------\nSettup MOTD\n\n" | tee -a $log
 curl "$v_repo/kickstart/banner" > /etc/banner
 curl "$v_repo/kickstart/motd.sh" > /etc/motd.sh
 sed -i --follow-symlinks '/motd.sh/d' .bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> .bashrc
 
 
-echo -en "\n-------------------------------------------------------\nSetting up git\n\n"
+echo -en "\n-------------------------------------------------------\nSetting up git\n\n" | tee -a $log
 cd $HOME
 git config --global user.email "$v_gitEmail"
 git config --global user.name "$v_gitUser"
 git config --global credential.helper store
 
 
-echo -en "\n-------------------------------------------------------\nInstall Dependencies\n\n"
+echo -en "\n-------------------------------------------------------\nInstall Dependencies\n\n" | tee -a $log
 cd $HOME
 git clone https://github.com/jgarff/rpi_ws281x.git
 cd rpi_ws281x
@@ -82,9 +83,9 @@ cd python
 sudo python3 setup.py install
 
 
-echo -en "\n-------------------------------------------------------\nInstall Automation\n\n"
+echo -en "\n-------------------------------------------------------\nInstall Automation\n\n" | tee -a $log
 cd $HOME
 git clone https://github.com/bbaumg/automation.git
 #sudo bash automation/install.sh
 
-echo -en "\n-------------------------------------------------------\nBuild Complete\n\n"
+echo -en "\n-------------------------------------------------------\nBuild Complete\n\n" | tee -a $log
