@@ -26,7 +26,7 @@ sudo pip-3.2 install pyephem pymysql configparser
 echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n"
 echo -en "\n# Some stuff I added\n"\
 "alias ll='ls -alh'\n"\
-"export EDITOR=vim\n"
+"export EDITOR=vim\n"\
 "alias python=python3\n" >> .bashrc
 
 
