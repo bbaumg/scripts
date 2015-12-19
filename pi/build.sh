@@ -8,7 +8,8 @@
 #Variables
 log="/var/log/pibuild.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
-v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
+v_defaultapps="vim git-core"
+#v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
 v_gitEmail='bbaumg@gmail.com'
 v_gitUser='Barrett'
 
@@ -21,7 +22,7 @@ sudo apt-get update -y
 echo -en "\n-------------------------------------------------------\napt-get dist-upgrade\n\n" | tee -a $log
 sudo apt-get install -y $v_defaultapps
 echo -en "\n-------------------------------------------------------\npip3.2 install\n\n" | tee -a $log
-sudo pip-3.2 install pyephem pymysql configparser
+#sudo pip-3.2 install pyephem pymysql configparser
 
 
 echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n" | tee -a $log
@@ -61,11 +62,11 @@ echo -en ""\
 "# m h  dom mon dow   command\n"\
 "\n"\
 "0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" >> rootcrontab
-sudo crontab rootcrontab
+#sudo crontab rootcrontab
 
 
 echo -en "\n-------------------------------------------------------\nSettup MOTD\n\n" | tee -a $log
-curl "$v_repo/kickstart/banner" > /etc/banner
+curl "$v_repo/kickstart/banner" > /etc/issue
 curl "$v_repo/kickstart/motd.sh" > /etc/motd.sh
 sed -i --follow-symlinks '/motd.sh/d' .bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> .bashrc
@@ -78,18 +79,18 @@ git config --global user.name "$v_gitUser"
 git config --global credential.helper store
 
 
-echo -en "\n-------------------------------------------------------\nInstall Dependencies\n\n" | tee -a $log
-cd $HOME
-git clone https://github.com/jgarff/rpi_ws281x.git
-cd rpi_ws281x
-scons
-cd python
-sudo python3 setup.py install
+#echo -en "\n-------------------------------------------------------\nInstall Dependencies\n\n" | tee -a $log
+#cd $HOME
+#git clone https://github.com/jgarff/rpi_ws281x.git
+#cd rpi_ws281x
+#scons
+#cd python
+#sudo python3 setup.py install
 
 
-echo -en "\n-------------------------------------------------------\nInstall Automation\n\n" | tee -a $log
-cd $HOME
-git clone https://github.com/bbaumg/automation.git
+#echo -en "\n-------------------------------------------------------\nInstall Automation\n\n" | tee -a $log
+#cd $HOME
+#git clone https://github.com/bbaumg/automation.git
 #sudo bash automation/install.sh
 
 echo -en "\n-------------------------------------------------------\nBuild Complete\n\n" | tee -a $log
