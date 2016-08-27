@@ -10,8 +10,8 @@ log="/var/log/pibuild.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
 v_defaultapps="vim git-core"
 #v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
-v_gitEmail='bbaumg@gmail.com'
-v_gitUser='Barrett'
+v_gitEmail=''
+v_gitUser=''
 
 # OK, let's install all of the basic stuff and do the basline configurations
 sudo raspi-config
