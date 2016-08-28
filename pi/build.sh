@@ -32,8 +32,7 @@ sed -i --follow-symlinks '/export EDITOR/d' .bashrc
 sed -i --follow-symlinks '/alias python/d' .bashrc
 echo -en "\n# Some stuff I added\n"\
 "alias ll='ls -alh'\n"\
-"export EDITOR=vim\n"\
-"alias python=python3\n" >> .bashrc
+"export EDITOR=vim\n" >> .bashrc
 
 
 echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n" | tee -a $log
@@ -61,7 +60,7 @@ echo -en ""\
 "# \n"\
 "# m h  dom mon dow   command\n"\
 "\n"\
-"0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" >> rootcrontab
+"0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" #>> rootcrontab
 #sudo crontab rootcrontab
 
 
