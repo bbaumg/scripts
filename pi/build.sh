@@ -47,13 +47,12 @@ done
 
 
 # OK, let's install all of the basic stuff and do the basline configurations
-echo -en "\n-------------------------------------------------------\napt-get update\n\n" | tee -a $log
+echo -en "\n-------------------------------------------------------\napt dist-upgrade\n\n" | tee -a $log
 sudo apt dist-upgrade -y
-echo -en "\n-------------------------------------------------------\napt-get install\n\n" | tee -a $log
+echo -en "\n-------------------------------------------------------\napt upgrade\n\n" | tee -a $log
 sudo apt upgrade -y
-echo -en "\n-------------------------------------------------------\napt-get dist-upgrade\n\n" | tee -a $log
+echo -en "\n-------------------------------------------------------\napt install\n\n" | tee -a $log
 sudo apt install -y $v_defaultapps
-echo -en "\n-------------------------------------------------------\npip3.2 install\n\n" | tee -a $log
 
 echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n" | tee -a $log
 sed -i --follow-symlinks '/stuff/d' .bashrc
