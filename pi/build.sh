@@ -5,6 +5,12 @@
 # curl "https://raw.githubusercontent.com/bbaumg/scripts/master/pi/build.sh" > build.sh
 # bash build.sh
 
+# Exit if you ran this as root...
+if [ "$(whoami)" == "root" ]; then
+        echo "Don't run as sudo/root"
+        echo "bash build.sh"
+        exit 1
+fi
 #Variables
 log="/var/log/pibuild.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
@@ -49,10 +55,14 @@ done
 # OK, let's install all of the basic stuff and do the basline configurations
 echo -en "\n-------------------------------------------------------\napt update\n\n" | tee -a $log
 sudo apt update -y
-echo -en "\n-------------------------------------------------------\napt dist-upgrade\n\n" | tee -a $log
-sudo apt dist-upgrade -y
 echo -en "\n-------------------------------------------------------\napt upgrade\n\n" | tee -a $log
 sudo apt upgrade -y
+echo -en "\n-------------------------------------------------------\napt dist-upgrade\n\n" | tee -a $log
+sudo apt dist-upgrade -y
+echo -en "\n-------------------------------------------------------\napt autoremove\n\n" | tee -a $log
+sudo apt autoremove -y
+echo -en "\n-------------------------------------------------------\napt clean\n\n" | tee -a $log
+sudo apt clean -y
 echo -en "\n-------------------------------------------------------\napt install\n\n" | tee -a $log
 sudo apt install -y $v_defaultapps
 
@@ -68,29 +78,6 @@ echo -en "\n# Some stuff I added\n"\
 if [ $var_Upgrade = "Y" ]; then
   echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n" | tee -a $log
   echo -en ""\
-  "# Edit this file to introduce tasks to be run by cron.\n"\
-  "# \n"\
-  "# Each task to run has to be defined through a single line\n"\
-  "# indicating with different fields when the task will be run\n"\
-  "# and what command to run for the task\n"\
-  "# \n"\
-  "# To define the time you can provide concrete values for\n"\
-  "# minute (m), hour (h), day of month (dom), month (mon),\n"\
-  "# and day of week (dow) or use '*' in these fields (for 'any').# \n"\
-  "# Notice that tasks will be started based on the cron's system\n"\
-  "# daemon's notion of time and timezones.\n"\
-  "# \n"\
-  "# Output of the crontab jobs (including errors) is sent through\n"\
-  "# email to the user the crontab file belongs to (unless redirected).\n"\
-  "# \n"\
-  "# For example, you can run a backup of all your user accounts\n"\
-  "# at 5 a.m every week with:\n"\
-  "# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/\n"\
-  "# \n"\
-  "# For more information see the manual pages of crontab(5) and cron(8)\n"\
-  "# \n"\
-  "# m h  dom mon dow   command\n"\
-  "\n"\
   "0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" > rootcrontab
 fi
 #sudo crontab rootcrontab
