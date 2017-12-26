@@ -8,7 +8,7 @@
 #Variables
 log="/var/log/pibuild.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
-v_defaultapps="vim git-core htop python python-pip python-dev python-smbus python-imaging i2c-tools"
+v_defaultapps="vim git-core htop python python-pip python-dev python-smbus python-imaging i2c-tools dirmngr"
 #v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
 v_gitEmail=''
 v_gitUser=''
@@ -47,6 +47,8 @@ done
 
 
 # OK, let's install all of the basic stuff and do the basline configurations
+echo -en "\n-------------------------------------------------------\napt update\n\n" | tee -a $log
+sudo apt update -y
 echo -en "\n-------------------------------------------------------\napt dist-upgrade\n\n" | tee -a $log
 sudo apt dist-upgrade -y
 echo -en "\n-------------------------------------------------------\napt upgrade\n\n" | tee -a $log
