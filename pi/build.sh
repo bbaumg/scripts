@@ -79,14 +79,40 @@ if [ $var_Upgrade = "Y" ]; then
   echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n" | tee -a $log
   echo -en ""\
   "0 2 * * 1 apt-get update -y && apt-get dist-upgrade -y\n" > rootcrontab
+  #sudo crontab rootcrontab
 fi
-#sudo crontab rootcrontab
 
 echo -en "\n-------------------------------------------------------\nSettup MOTD\n\n" | tee -a $log
-curl "$v_repo/kickstart/banner" > /etc/issue
-curl "$v_repo/kickstart/motd.sh" > /etc/motd.sh
+curl "$v_repo/kickstart/banner" | sudo tee /etc/issue
+curl "$v_repo/kickstart/motd.sh" | sudo tee /etc/motd.sh
 sed -i --follow-symlinks '/motd.sh/d' .bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> .bashrc
+
+echo -en "\n-------------------------------------------------------\nLocking down SSH\n\n" | tee -a $log
+echo "Locking down SSH" | tee -a $log
+sshconf="/etc/ssh/sshd_config"
+sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
+#sed -i --follow-symlinks 's/#PrintLastLog\ yes/PrintLastLog\ no/g' $sshconf
+#sed -i --follow-symlinks 's/#Banner\ none/Banner\ \/etc\/issue/g' $sshconf
+#sed -i --follow-symlinks 's/GSSAPIAuthentication\ yes/GSSAPIAuthentication\ no/g' $sshconf
+service sshd restart | tee -a $log
+
+
+
+
+###  Some SED examples for future use:
+#sed -ir 's/^expose_php.*$/expose_php = Off/g' /etc/php.ini | tee -a $log
+#sed -ir 's/^file_uploads.*$/file_uploads = On/g' /etc/php.ini | tee -a $log
+#sed -ir 's/^allow_url_fopen.*$/allow_url_fopen = Off/g' /etc/php.ini | tee -a $log
+#sed -ir 's/^allow_url_fopen.*$/allow_url_fopen = Off/g' /etc/php.ini | tee -a $log
+#sed -ir '/date\.timezone =.*/s/.*/date\.timezone = "America\/Chicado"/g' /etc/php.ini | tee -a $log
+#sed -ir 's/file_uploads.*$/file_uploads = Off/g' /etc/php.ini | tee -a $log
+#sed -ir 's/sql.safe_mode.*$/sql.safe_mode = Off/g' /etc/php.ini
+# The following were not in the current php.ini file.  not sure if they should be added or not...
+#sed -ir 's/safe_mode.*$/safe_mode = On/g' /etc/php.ini
+#sed -ir 's/safe_mode_include_dir.*$/safe_mode_include_dir = \/var\/www\/html/g' /etc/php.ini
+
+
 
 if [ $var_Git = "Y" ]; then
   echo -en "\n-------------------------------------------------------\nSetting up git\n\n" | tee -a $log
