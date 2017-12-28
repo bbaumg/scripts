@@ -14,7 +14,7 @@ fi
 #Variables
 log="/var/log/pibuild.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
-v_defaultapps="vim git-core htop python python-pip python-dev python-smbus python-imaging i2c-tools dirmngr"
+v_defaultapps="vim git-core htop python python-pip python-dev python-smbus python-imaging i2c-tools"
 #v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
 v_gitEmail=''
 v_gitUser=''
