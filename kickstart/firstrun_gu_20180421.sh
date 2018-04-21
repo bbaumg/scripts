@@ -120,8 +120,8 @@ until [ "$val_allgood" == "YES" ]; do
 	                val_gateway=1
 	        fi
 	done
-	#dns="DNS1=10.105.120.50\nDNS2=10.105.120.51\nDNS3=10.105.120.50\nDNS4=172.16.1.41"
-	dns="DNS1=10.201.120.50\nDNS2=10.201.120.49\nDNS3=10.105.120.50\nDNS4=10.105.120.51"
+	#dns="DNS1=10.201.120.50\nDNS2=10.201.120.49\nDNS3=10.105.120.50\nDNS4=10.105.120.51"
+	dns="1.1.1.1"
 	echo -en "\n\nPlease check the settings are right?\n\n"\
 "Hostname=$v_hostname\n"\
 "IPADDR=$ipaddr\n"\
