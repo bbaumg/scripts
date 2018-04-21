@@ -3,7 +3,7 @@
 log="/var/log/firstboot.log"
 admins='guadmins'
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master/kickstart/'
-_defaultapps="logrotate bind-utils cifs-utils vim openssh-clients wget chrony traceroute htop net-snmp net-snmp-utils"
+v_defaultapps="logrotate bind-utils cifs-utils vim openssh-clients wget chrony traceroute htop net-snmp net-snmp-utils"
 OSVer=$(cat /etc/redhat-release | grep -oE '[0-9]+\.[0-9]+' | awk -F '.' '{print $1}')
 OSFlavor=$(cat /etc/redhat-release | awk '{print $1}')
 
