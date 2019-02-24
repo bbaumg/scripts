@@ -36,7 +36,7 @@ touch ssh
 
 
 
-
+#https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html
 Write the below to file "wpa_supplicant.conf"
 country=AU
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
