@@ -51,7 +51,6 @@ while true; do
     esac
 done
 
-
 # OK, let's install all of the basic stuff and do the basline configurations
 echo -en "\n-------------------------------------------------------\napt update\n\n" | tee -a $log
 sudo apt update -y
@@ -122,5 +121,15 @@ if [ $var_Git = "Y" ]; then
   git config --global credential.helper store
 fi
 
+
+# Eventually I would like to stop using raspi-config interactively...  Here are some commands to get me there.
+#prompt to change password at the beginning of this script.
+#split memory = 0 (may not be a big deal though)
+#sudo raspi-config nonint do_hostname pizero (need to prompt for name)
+#sudo raspi-config nonint do_expand_rootfs
+#sudo raspi-config nonint do_change_locale en_US.UTF-8
+#sudo raspi-config nonint do_change_timezone US/Central
+
 sudo raspi-config
+
 echo -en "\n-------------------------------------------------------\nBuild Complete\n\n" | tee -a $log
