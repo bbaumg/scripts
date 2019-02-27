@@ -74,6 +74,9 @@ echo -en "\n# Some stuff I added\n"\
 "alias ll='ls -alh'\n"\
 "export EDITOR=vim\n" >> .bashrc
 
+echo -en "\n-------------------------------------------------------\nCreating .vimrc\n\n" | tee -a $log
+echo "set mouse-=a" > .vimrc
+
 if [ $var_Upgrade = "Y" ]; then
   echo -en "\n-------------------------------------------------------\nCreating root crontab\n\n" | tee -a $log
   echo -en ""\
