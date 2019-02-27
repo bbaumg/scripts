@@ -51,6 +51,10 @@ while true; do
     esac
 done
 
+# Change the password
+echo "Change your password" | tee -a $log
+passwd
+
 # OK, let's install all of the basic stuff and do the basline configurations
 echo -en "\n-------------------------------------------------------\napt update\n\n" | tee -a $log
 sudo apt update -y
