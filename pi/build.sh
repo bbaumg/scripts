@@ -141,3 +141,14 @@ sudo raspi-config nonint do_change_timezone US/Central
 #sudo raspi-config
 
 echo -en "\n-------------------------------------------------------\nBuild Complete\n\n" | tee -a $log
+
+while true; do
+    read -p "Reboot now (y/n)? " yn
+    case $yn in
+        [Yy]* )
+                sudo Reboot
+        [Nn]* )
+                break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
