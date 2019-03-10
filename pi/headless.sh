@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#based on information learned from
+#https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html
+
 while true; do
     echo "........................."
     pwd
@@ -19,29 +22,22 @@ while true; do
     read -p "Do you want to setup wireless (y/n)? " yn
     case $yn in
         [Yy]* )
-		read -p "What is the Password? " wifiPass
-		echo 
-
-                break;;
+            read -p "What SSID do you want to connect to? " wifiSSID
+            #echo -en "\n$wifiSSID\n"
+            echo -en "What is the Password? "
+            read -s wifiPass
+            echo -en "\nCreating wifi settings file 'wpa_supplicant.conf'"
+            #echo -en "\n$wifiPass\n"
+            echo -en "country=US\n"\
+"ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n"\
+"network={\n\tssid=\"$wifiSSID\"\n\tpsk=\"$wifiPass\"\n\tkey_mgmt=WPA-PSK\n}\n" > wpa_supplicant.conf
+            break;;
         [Nn]* )
                 echo "OK...  No Wireless"
                 break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
-exit
-echo "creating 'ssh' file in the root of boot"
+echo "Creating 'ssh' file in the root of boot"
 touch ssh
-
-
-
-#https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html
-Write the below to file "wpa_supplicant.conf"
-country=AU
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-network={
-	ssid="MyWiFiNetwork"
-	psk="aVeryStrongPassword"
-	key_mgmt=WPA-PSK
-}
+echo "Build Complete"
