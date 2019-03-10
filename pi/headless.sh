@@ -7,8 +7,6 @@ while true; do
     read -p "Are you already in the boot directory (y/n)? " yn
     case $yn in
         [Yy]* )
-                echo "Updates will be scheduled weekly."
-                var_Upgrade='Y'
                 break;;
         [Nn]* )
                 echo "OK...  Exiting.  Go there first"
@@ -21,8 +19,9 @@ while true; do
     read -p "Do you want to setup wireless (y/n)? " yn
     case $yn in
         [Yy]* )
-                echo "Updates will be scheduled weekly."
-                var_Upgrade='Y'
+		read -p "What is the Password? " wifiPass
+		echo 
+
                 break;;
         [Nn]* )
                 echo "OK...  No Wireless"
@@ -30,7 +29,7 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
-
+exit
 echo "creating 'ssh' file in the root of boot"
 touch ssh
 
