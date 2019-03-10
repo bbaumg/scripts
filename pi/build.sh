@@ -61,18 +61,18 @@ read -p "What do you want to name this PI? " var_name
 echo -en "\nThis Pi will be named $var_name\n\n" | tee -a $log
 
 # OK, let's install all of the basic stuff and do the basline configurations
-echo -en "\n-------------------------------------------------------\napt update\n\n" | tee -a $log
-sudo apt update -y | tee -a $log
-echo -en "\n-------------------------------------------------------\napt upgrade\n\n" | tee -a $log
-sudo apt upgrade -y | tee -a $log
-echo -en "\n-------------------------------------------------------\napt dist-upgrade\n\n" | tee -a $log
-sudo apt dist-upgrade -y | tee -a $log
-echo -en "\n-------------------------------------------------------\napt autoremove\n\n" | tee -a $log
-sudo apt autoremove -y | tee -a $log
-echo -en "\n-------------------------------------------------------\napt clean\n\n" | tee -a $log
-sudo apt clean -y | tee -a $log
-echo -en "\n-------------------------------------------------------\napt install\n\n" | tee -a $log
-sudo apt install -y $v_defaultapps | tee -a $log
+echo -en "\n-------------------------------------------------------\napt-get update\n\n" | tee -a $log
+sudo apt-get update -y | tee -a $log
+echo -en "\n-------------------------------------------------------\napt-get upgrade\n\n" | tee -a $log
+sudo apt-get upgrade -y | tee -a $log
+echo -en "\n-------------------------------------------------------\napt-get dist-upgrade\n\n" | tee -a $log
+sudo apt-get dist-upgrade -y | tee -a $log
+echo -en "\n-------------------------------------------------------\napt-get autoremove\n\n" | tee -a $log
+sudo apt-get autoremove -y | tee -a $log
+echo -en "\n-------------------------------------------------------\napt-get clean\n\n" | tee -a $log
+sudo apt-get clean -y | tee -a $log
+echo -en "\n-------------------------------------------------------\napt-get install\n\n" | tee -a $log
+sudo apt-get install -y $v_defaultapps | tee -a $log
 
 echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n" | tee -a $log
 sed -i --follow-symlinks '/stuff/d' .bashrc
