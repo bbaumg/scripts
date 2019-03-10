@@ -146,7 +146,8 @@ while true; do
     read -p "Reboot now (y/n)? " yn
     case $yn in
         [Yy]* )
-                sudo Reboot
+                sudo reboot
+                break;;
         [Nn]* )
                 break;;
         * ) echo "Please answer yes or no.";;
