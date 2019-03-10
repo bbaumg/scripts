@@ -100,7 +100,7 @@ echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> .bashrc
 echo -en "\n-------------------------------------------------------\nLocking down SSH\n\n" | tee -a $log
 echo "Locking down SSH" | tee -a $log
 sshconf="/etc/ssh/sshd_config"
-sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
+sudo sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
 #sed -i --follow-symlinks 's/#PrintLastLog\ yes/PrintLastLog\ no/g' $sshconf
 #sed -i --follow-symlinks 's/#Banner\ none/Banner\ \/etc\/issue/g' $sshconf
 #sed -i --follow-symlinks 's/GSSAPIAuthentication\ yes/GSSAPIAuthentication\ no/g' $sshconf
