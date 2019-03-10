@@ -7,6 +7,8 @@
 #based on information learned from
 #https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html
 
+#asdf
+
 while true; do
     echo "........................."
     pwd
