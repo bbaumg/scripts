@@ -5,8 +5,6 @@
 # curl "https://raw.githubusercontent.com/bbaumg/scripts/master/pi/build.sh" > build.sh
 # bash build.sh
 
-#asdf
-
 # Exit if you ran this as root...
 if [ "$(whoami)" == "root" ]; then
         echo "Don't run as sudo/root"
