@@ -14,7 +14,7 @@ fi
 #Variables
 log="/var/log/pibuild.log"
 sudo touch $log
-sudo chmod 664 $log
+sudo chmod 666 $log
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
 v_defaultapps="vim git-core htop python python-pip python-dev python-smbus python-imaging i2c-tools"
 #v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
@@ -62,17 +62,17 @@ echo -en "\nThis Pi will be named $var_name\n\n" | tee -a $log
 
 # OK, let's install all of the basic stuff and do the basline configurations
 echo -en "\n-------------------------------------------------------\napt update\n\n" | tee -a $log
-sudo apt update -y
+sudo apt update -y | tee -a $log
 echo -en "\n-------------------------------------------------------\napt upgrade\n\n" | tee -a $log
-sudo apt upgrade -y
+sudo apt upgrade -y | tee -a $log
 echo -en "\n-------------------------------------------------------\napt dist-upgrade\n\n" | tee -a $log
-sudo apt dist-upgrade -y
+sudo apt dist-upgrade -y | tee -a $log
 echo -en "\n-------------------------------------------------------\napt autoremove\n\n" | tee -a $log
-sudo apt autoremove -y
+sudo apt autoremove -y | tee -a $log
 echo -en "\n-------------------------------------------------------\napt clean\n\n" | tee -a $log
-sudo apt clean -y
+sudo apt clean -y | tee -a $log
 echo -en "\n-------------------------------------------------------\napt install\n\n" | tee -a $log
-sudo apt install -y $v_defaultapps
+sudo apt install -y $v_defaultapps | tee -a $log
 
 echo -en "\n-------------------------------------------------------\nAdding to .bashrc\n\n" | tee -a $log
 sed -i --follow-symlinks '/stuff/d' .bashrc
