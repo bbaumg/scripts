@@ -97,14 +97,14 @@ curl "$v_repo/kickstart/motd.sh" | sudo tee /etc/motd.sh
 sed -i --follow-symlinks '/motd.sh/d' .bashrc
 echo '[ -n "$PS1" ] && bash /etc/motd.sh' >> .bashrc
 
-echo -en "\n-------------------------------------------------------\nLocking down SSH\n\n" | tee -a $log
-echo "Locking down SSH" | tee -a $log
-sshconf="/etc/ssh/sshd_config"
-sudo sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
+#echo -en "\n-------------------------------------------------------\nLocking down SSH\n\n" | tee -a $log
+#echo "Locking down SSH" | tee -a $log
+#sshconf="/etc/ssh/sshd_config"
+#sudo sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshconf
 #sed -i --follow-symlinks 's/#PrintLastLog\ yes/PrintLastLog\ no/g' $sshconf
 #sed -i --follow-symlinks 's/#Banner\ none/Banner\ \/etc\/issue/g' $sshconf
 #sed -i --follow-symlinks 's/GSSAPIAuthentication\ yes/GSSAPIAuthentication\ no/g' $sshconf
-service sshd restart | tee -a $log
+#sudo service sshd restart | tee -a $log
 
 
 
