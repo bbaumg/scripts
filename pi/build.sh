@@ -16,7 +16,8 @@ log="/var/log/pibuild.log"
 sudo touch $log
 sudo chmod 666 $log
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
-v_defaultapps="vim git-core git htop python python-pip python-dev python-smbus python-imaging i2c-tools"
+v_defaultapps="vim git htop i2c-tools"
+#v_defaultapps="vim git-core git htop python python-pip python-dev python-smbus python-imaging i2c-tools"
 #v_defaultapps="python3-pip python3-dev vim git-core locate build-essential scons swig htop"
 v_gitEmail=''
 v_gitUser=''
@@ -71,6 +72,8 @@ echo -en "\n-------------------------------------------------------\napt-get aut
 sudo apt-get autoremove -y | tee -a $log
 echo -en "\n-------------------------------------------------------\napt-get clean\n\n" | tee -a $log
 sudo apt-get clean -y | tee -a $log
+echo -en "\n-------------------------------------------------------\napt-get update\n\n" | tee -a $log
+sudo apt-get update -y | tee -a $log
 echo -en "\n-------------------------------------------------------\napt-get install\n\n" | tee -a $log
 sudo apt-get install -y $v_defaultapps | tee -a $log
 
