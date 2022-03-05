@@ -2,7 +2,7 @@
 
 # Instructions:
 # Run the two below commands on the pi.
-# curl "https://raw.githubusercontent.com/bbaumg/scripts/master/pi/build.sh" > build.sh && build.sh
+# curl "https://raw.githubusercontent.com/bbaumg/scripts/master/pi/build.sh" > build.sh && bash build.sh
 
 # Exit if you ran this as root...
 if [ "$(whoami)" == "root" ]; then
