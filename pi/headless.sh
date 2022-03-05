@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #Usage
-#curl https://raw.githubusercontent.com/bbaumg/scripts/master/pi/headless.sh > headless.sh
-#bash headless.sh
+#curl https://raw.githubusercontent.com/bbaumg/scripts/master/pi/headless.sh > headless.sh && bash headless.sh
 
 #based on information learned from
 #https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html
