@@ -74,8 +74,8 @@ while true; do
 done
 
 # Change the password
-echo "Change your password" | tee -a $log
-passwd
+# echo "Change your password" | tee -a $log
+# passwd
 
 read -p "What do you want to name this PI? " var_name
 echo -en "\nThis Pi will be named $var_name\n\n" | tee -a $log
