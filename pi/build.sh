@@ -164,6 +164,7 @@ sudo raspi-config nonint do_change_timezone US/Central
 
 echo -en "\n-------------------------------------------------------\nBuild Complete\n\n" | tee -a $log
 
+echo -en "\n\n\nSetup SSK Keys 'ssh-copy-id remote_username@server_ip_address'\n\n" | tee -a $log
 while true; do
     read -p "Reboot now (y/n)? " yn
     case $yn in
