@@ -2,7 +2,7 @@
 
 # Instructions:
 # Run the two below commands on the pi.
-# curl "https://raw.githubusercontent.com/bbaumg/scripts/master/kickstart/mininal.sh" > minimal.sh && bash minimal.sh
+# curl "https://raw.githubusercontent.com/bbaumg/scripts/master/kickstart/minimal.sh" > minimal.sh && bash minimal.sh
 
 
 #Variables
