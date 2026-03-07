@@ -8,7 +8,7 @@
 #Variables
 log="/var/log/firstboot.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
-v_defaultapps="logrotate bind-utils cifs-utils vim openssh-clients wget" # ntsysv ntp traceroute lynx ftp sudoers curl mlocate"
+v_defaultapps="logrotate vim wget htop" # ntsysv ntp traceroute lynx ftp sudoers curl mlocate"
 
 #Set grub to show messages during boot
 echo "Set machine to show messages during boot process" | tee -a $log
@@ -31,3 +31,6 @@ echo "Running apt update and then apt upgrade" | tee -a $log
 apt update && apt upgrade -y | tee -a $log
 echo "Installing default apps" | tee -a $log
 bash <(echo "apt install -y $v_defaultapps") | tee -a $log
+
+echo "Rebooting" | tee -a $log
+reboot | tee -a $log
