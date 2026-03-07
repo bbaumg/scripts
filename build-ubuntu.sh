@@ -10,6 +10,11 @@ log="/var/log/firstboot.log"
 v_repo='https://raw.githubusercontent.com/bbaumg/scripts/master'
 v_defaultapps="logrotate vim wget htop" # ntsysv ntp traceroute lynx ftp sudoers curl mlocate"
 
+# Base system configurations
+echo "Setting to my timezone" | tee -a $log
+timedatectl set-timezone America/Chicago | tee -a $log
+
+
 #Set grub to show messages during boot
 echo "Set machine to show messages during boot process" | tee -a $log
 sed -i --follow-symlinks 's/rhgb\ //g' /etc/grub.conf
@@ -21,6 +26,7 @@ sed -i --follow-symlinks 's/#PermitRootLogin\ yes/PermitRootLogin\ no/g' $sshcon
 service sshd restart | tee -a $log
 
 # Setup MOTD
+#  This didn't work on Ubuntu 24.04
 echo "Settup MOTD" | tee -a $log
 curl "$v_repo/kickstart/motd.sh" > /etc/motd.sh
 sed -i --follow-symlinks '/motd.sh/d' /etc/bashrc
