@@ -2,7 +2,7 @@
 
 # Instructions:
 # Run the two below commands on the pi.
-# curl "https://raw.githubusercontent.com/bbaumg/scripts/master/kickstart/build-ubuntu.sh" > build.sh && bash build.sh
+# curl "https://raw.githubusercontent.com/bbaumg/scripts/master/build-ubuntu.sh" > build.sh && bash build.sh
 
 
 #Variables
